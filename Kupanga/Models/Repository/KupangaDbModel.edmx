@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KupangaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Components">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="ComponentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ComponentPrice" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HomeImages">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HomeId" Type="int" Nullable="false" />
+          <Property Name="ImageURL" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ImageTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Homes">
+          <Key>
+            <PropertyRef Name="HomeId" />
+          </Key>
+          <Property Name="HomeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HomeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HomeDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="BasePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImageType">
+          <Key>
+            <PropertyRef Name="ImageTypeId" />
+          </Key>
+          <Property Name="ImageTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="NotificationName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NotificationText" Type="varchar(max)" Nullable="false" />
+          <Property Name="NotificationCreationDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteComponents">
+          <Key>
+            <PropertyRef Name="QuoteComponentId" />
+          </Key>
+          <Property Name="QuoteComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuoteId" Type="int" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubmittedQuotes">
+          <Key>
+            <PropertyRef Name="QuoteId" />
+          </Key>
+          <Property Name="QuoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactEmail" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ContactStreetAddress" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ContactCity" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ContactState" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactZip" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HandledBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="HomeId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Components_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HomeImages_Homes">
+          <End Role="Homes" Type="Self.Homes" Multiplicity="1" />
+          <End Role="HomeImages" Type="Self.HomeImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Homes">
+              <PropertyRef Name="HomeId" />
+            </Principal>
+            <Dependent Role="HomeImages">
+              <PropertyRef Name="HomeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HomeImages_ImageType">
+          <End Role="ImageType" Type="Self.ImageType" Multiplicity="1" />
+          <End Role="HomeImages" Type="Self.HomeImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageType">
+              <PropertyRef Name="ImageTypeId" />
+            </Principal>
+            <Dependent Role="HomeImages">
+              <PropertyRef Name="ImageTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteComponents_Components">
+          <End Role="Components" Type="Self.Components" Multiplicity="1" />
+          <End Role="QuoteComponents" Type="Self.QuoteComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="QuoteComponents">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteComponents_SubmittedQuotes">
+          <End Role="SubmittedQuotes" Type="Self.SubmittedQuotes" Multiplicity="0..1" />
+          <End Role="QuoteComponents" Type="Self.QuoteComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubmittedQuotes">
+              <PropertyRef Name="QuoteId" />
+            </Principal>
+            <Dependent Role="QuoteComponents">
+              <PropertyRef Name="QuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmittedQuotes_Homes">
+          <End Role="Homes" Type="Self.Homes" Multiplicity="1" />
+          <End Role="SubmittedQuotes" Type="Self.SubmittedQuotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Homes">
+              <PropertyRef Name="HomeId" />
+            </Principal>
+            <Dependent Role="SubmittedQuotes">
+              <PropertyRef Name="HomeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KupangaModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeImages" EntityType="Self.HomeImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Homes" EntityType="Self.Homes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageType" EntityType="Self.ImageType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteComponents" EntityType="Self.QuoteComponents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubmittedQuotes" EntityType="Self.SubmittedQuotes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Components_Categories" Association="Self.FK_Components_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HomeImages_Homes" Association="Self.FK_HomeImages_Homes">
+            <End Role="Homes" EntitySet="Homes" />
+            <End Role="HomeImages" EntitySet="HomeImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HomeImages_ImageType" Association="Self.FK_HomeImages_ImageType">
+            <End Role="ImageType" EntitySet="ImageType" />
+            <End Role="HomeImages" EntitySet="HomeImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteComponents_Components" Association="Self.FK_QuoteComponents_Components">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="QuoteComponents" EntitySet="QuoteComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteComponents_SubmittedQuotes" Association="Self.FK_QuoteComponents_SubmittedQuotes">
+            <End Role="SubmittedQuotes" EntitySet="SubmittedQuotes" />
+            <End Role="QuoteComponents" EntitySet="QuoteComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Homes" Association="Self.FK_SubmittedQuotes_Homes">
+            <End Role="Homes" EntitySet="Homes" />
+            <End Role="SubmittedQuotes" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KupangaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Components" Relationship="Self.FK_Components_Categories" FromRole="Categories" ToRole="Components" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ComponentPrice" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Components_Categories" FromRole="Components" ToRole="Categories" />
+          <NavigationProperty Name="QuoteComponents" Relationship="KupangaModel.FK_QuoteComponents_Components" FromRole="Component" ToRole="QuoteComponent" />
+        </EntityType>
+        <EntityType Name="HomeImage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HomeId" Type="Int32" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImageTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Home" Relationship="Self.FK_HomeImages_Homes" FromRole="HomeImages" ToRole="Homes" />
+          <NavigationProperty Name="ImageType" Relationship="Self.FK_HomeImages_ImageType" FromRole="HomeImages" ToRole="ImageType" />
+        </EntityType>
+        <EntityType Name="Home">
+          <Key>
+            <PropertyRef Name="HomeId" />
+          </Key>
+          <Property Name="HomeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HomeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HomeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BasePrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="HomeImages" Relationship="Self.FK_HomeImages_Homes" FromRole="Homes" ToRole="HomeImages" />
+          <NavigationProperty Name="SubmittedQuotes" Relationship="KupangaModel.FK_SubmittedQuotes_Homes" FromRole="Home" ToRole="SubmittedQuote" />
+        </EntityType>
+        <EntityType Name="ImageType">
+          <Key>
+            <PropertyRef Name="ImageTypeId" />
+          </Key>
+          <Property Name="ImageTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HomeImages" Relationship="Self.FK_HomeImages_ImageType" FromRole="ImageType" ToRole="HomeImages" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NotificationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NotificationText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NotificationCreationDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Components_Categories">
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+          <End Role="Components" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HomeImages_Homes">
+          <End Role="Homes" Type="Self.Home" Multiplicity="1" />
+          <End Role="HomeImages" Type="Self.HomeImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Homes">
+              <PropertyRef Name="HomeId" />
+            </Principal>
+            <Dependent Role="HomeImages">
+              <PropertyRef Name="HomeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HomeImages_ImageType">
+          <End Role="ImageType" Type="Self.ImageType" Multiplicity="1" />
+          <End Role="HomeImages" Type="Self.HomeImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageType">
+              <PropertyRef Name="ImageTypeId" />
+            </Principal>
+            <Dependent Role="HomeImages">
+              <PropertyRef Name="ImageTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KupangaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Components" EntityType="Self.Component" />
+          <EntitySet Name="HomeImages" EntityType="Self.HomeImage" />
+          <EntitySet Name="Homes" EntityType="Self.Home" />
+          <EntitySet Name="ImageTypes" EntityType="Self.ImageType" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <AssociationSet Name="FK_Components_Categories" Association="Self.FK_Components_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HomeImages_Homes" Association="Self.FK_HomeImages_Homes">
+            <End Role="Homes" EntitySet="Homes" />
+            <End Role="HomeImages" EntitySet="HomeImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HomeImages_ImageType" Association="Self.FK_HomeImages_ImageType">
+            <End Role="ImageType" EntitySet="ImageTypes" />
+            <End Role="HomeImages" EntitySet="HomeImages" />
+          </AssociationSet>
+          <EntitySet Name="QuoteComponents" EntityType="KupangaModel.QuoteComponent" />
+          <EntitySet Name="SubmittedQuotes" EntityType="KupangaModel.SubmittedQuote" />
+          <AssociationSet Name="FK_QuoteComponents_Components" Association="KupangaModel.FK_QuoteComponents_Components">
+            <End Role="Component" EntitySet="Components" />
+            <End Role="QuoteComponent" EntitySet="QuoteComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Homes" Association="KupangaModel.FK_SubmittedQuotes_Homes">
+            <End Role="Home" EntitySet="Homes" />
+            <End Role="SubmittedQuote" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteComponents_SubmittedQuotes" Association="KupangaModel.FK_QuoteComponents_SubmittedQuotes">
+            <End Role="SubmittedQuote" EntitySet="SubmittedQuotes" />
+            <End Role="QuoteComponent" EntitySet="QuoteComponents" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="QuoteComponent">
+          <Key>
+            <PropertyRef Name="QuoteComponentId" />
+          </Key>
+          <Property Name="QuoteComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteId" Type="Int32" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Component" Relationship="KupangaModel.FK_QuoteComponents_Components" FromRole="QuoteComponent" ToRole="Component" />
+          <NavigationProperty Name="SubmittedQuote" Relationship="KupangaModel.FK_QuoteComponents_SubmittedQuotes" FromRole="QuoteComponent" ToRole="SubmittedQuote" />
+        </EntityType>
+        <EntityType Name="SubmittedQuote">
+          <Key>
+            <PropertyRef Name="QuoteId" />
+          </Key>
+          <Property Name="QuoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactEmail" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ContactStreetAddress" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ContactCity" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ContactState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactZip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HandledBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="HomeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Home" Relationship="KupangaModel.FK_SubmittedQuotes_Homes" FromRole="SubmittedQuote" ToRole="Home" />
+          <NavigationProperty Name="QuoteComponents" Relationship="KupangaModel.FK_QuoteComponents_SubmittedQuotes" FromRole="SubmittedQuote" ToRole="QuoteComponent" />
+        </EntityType>
+        <Association Name="FK_QuoteComponents_Components">
+          <End Type="KupangaModel.Component" Role="Component" Multiplicity="1" />
+          <End Type="KupangaModel.QuoteComponent" Role="QuoteComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="QuoteComponent">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmittedQuotes_Homes">
+          <End Type="KupangaModel.Home" Role="Home" Multiplicity="1" />
+          <End Type="KupangaModel.SubmittedQuote" Role="SubmittedQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Home">
+              <PropertyRef Name="HomeId" />
+            </Principal>
+            <Dependent Role="SubmittedQuote">
+              <PropertyRef Name="HomeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteComponents_SubmittedQuotes">
+          <End Type="KupangaModel.SubmittedQuote" Role="SubmittedQuote" Multiplicity="0..1" />
+          <End Type="KupangaModel.QuoteComponent" Role="QuoteComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubmittedQuote">
+              <PropertyRef Name="QuoteId" />
+            </Principal>
+            <Dependent Role="QuoteComponent">
+              <PropertyRef Name="QuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KupangaModelStoreContainer" CdmEntityContainer="KupangaEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="KupangaModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Components">
+            <EntityTypeMapping TypeName="KupangaModel.Component">
+              <MappingFragment StoreEntitySet="Components">
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
+                <ScalarProperty Name="ComponentPrice" ColumnName="ComponentPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeImages">
+            <EntityTypeMapping TypeName="KupangaModel.HomeImage">
+              <MappingFragment StoreEntitySet="HomeImages">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="HomeId" ColumnName="HomeId" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageTypeId" ColumnName="ImageTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Homes">
+            <EntityTypeMapping TypeName="KupangaModel.Home">
+              <MappingFragment StoreEntitySet="Homes">
+                <ScalarProperty Name="HomeId" ColumnName="HomeId" />
+                <ScalarProperty Name="HomeName" ColumnName="HomeName" />
+                <ScalarProperty Name="HomeDescription" ColumnName="HomeDescription" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageTypes">
+            <EntityTypeMapping TypeName="KupangaModel.ImageType">
+              <MappingFragment StoreEntitySet="ImageType">
+                <ScalarProperty Name="ImageTypeId" ColumnName="ImageTypeId" />
+                <ScalarProperty Name="ImageTypeName" ColumnName="ImageTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="KupangaModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="NotificationName" ColumnName="NotificationName" />
+                <ScalarProperty Name="NotificationText" ColumnName="NotificationText" />
+                <ScalarProperty Name="NotificationCreationDate" ColumnName="NotificationCreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteComponents">
+            <EntityTypeMapping TypeName="KupangaModel.QuoteComponent">
+              <MappingFragment StoreEntitySet="QuoteComponents">
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+                <ScalarProperty Name="QuoteComponentId" ColumnName="QuoteComponentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubmittedQuotes">
+            <EntityTypeMapping TypeName="KupangaModel.SubmittedQuote">
+              <MappingFragment StoreEntitySet="SubmittedQuotes">
+                <ScalarProperty Name="HomeId" ColumnName="HomeId" />
+                <ScalarProperty Name="HandledBy" ColumnName="HandledBy" />
+                <ScalarProperty Name="ContactZip" ColumnName="ContactZip" />
+                <ScalarProperty Name="ContactState" ColumnName="ContactState" />
+                <ScalarProperty Name="ContactCity" ColumnName="ContactCity" />
+                <ScalarProperty Name="ContactStreetAddress" ColumnName="ContactStreetAddress" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactLastName" ColumnName="ContactLastName" />
+                <ScalarProperty Name="ContactFirstName" ColumnName="ContactFirstName" />
+                <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

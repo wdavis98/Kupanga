@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="04ac490948a24ae186a93d3dbe8e3708" Name="Diagram1">
+        <EntityTypeShape EntityType="KupangaModel.Category" Width="1.5" PointX="2.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KupangaModel.Component" Width="1.5" PointX="5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KupangaModel.HomeImage" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KupangaModel.Home" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KupangaModel.ImageType" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KupangaModel.Notification" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="KupangaModel.FK_Components_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="KupangaModel.FK_HomeImages_Homes" ManuallyRouted="false" />
+        <AssociationConnector Association="KupangaModel.FK_HomeImages_ImageType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KupangaModel.QuoteComponent" Width="1.5" PointX="7.25" PointY="7.125" />
+        <EntityTypeShape EntityType="KupangaModel.SubmittedQuote" Width="1.5" PointX="3" PointY="8" />
+        <AssociationConnector Association="KupangaModel.FK_QuoteComponents_Components" />
+        <AssociationConnector Association="KupangaModel.FK_SubmittedQuotes_Homes" />
+        <AssociationConnector Association="KupangaModel.FK_QuoteComponents_SubmittedQuotes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

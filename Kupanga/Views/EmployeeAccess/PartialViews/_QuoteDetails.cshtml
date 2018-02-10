@@ -1,0 +1,88 @@
+﻿@model Kupanga.Models.Repository.SubmittedQuote
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Quote for @Model.ContactFirstName @Model.ContactLastName</h4>
+</div>
+<div class="modal-body">
+
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactFirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactFirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactLastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactLastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactStreetAddress)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactStreetAddress)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactCity)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactCity)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactState)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactState)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactZip)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactZip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HandledBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HandledBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Home.HomeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Home.HomeName)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuoteId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

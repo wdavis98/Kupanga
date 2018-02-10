@@ -1,0 +1,54 @@
+﻿@model Kupanga.Models.EmployeeAccessViewModel
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Home
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.SubmittedQuotes) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Home.HomeName)
+        </td>
+        <td>
+            <input type="button" data-toggle="modal" data-target="#QuoteDetailsModal" onclick="viewDetails(@item.QuoteId)" />
+        </td>
+    </tr>
+}
+
+</table>
+
+<div class="modal fade" id="QuoteDetailsModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div id="divModalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/Scripts/AjaxScripts.js"></script>
