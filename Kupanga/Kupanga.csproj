@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -246,6 +247,39 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\A. Choose\Homes\RanchStyle.jpg" />
+    <Content Include="Content\Images\A. Choose\Homes\OneStory.jpg" />
+    <Content Include="Content\Images\A. Choose\Homes\TwoStory.jpg" />
+    <Content Include="Content\Images\A. Choose\Homes\SingleFamily.jpg" />
+    <Content Include="Content\Images\A. Choose\step1.png" />
+    <Content Include="Content\Images\B. Customize\Doors\door1.jpg" />
+    <Content Include="Content\Images\B. Customize\Doors\door2.jpg" />
+    <Content Include="Content\Images\B. Customize\Doors\door3.jpg" />
+    <Content Include="Content\Images\B. Customize\Doors\door4.jpg" />
+    <Content Include="Content\Images\B. Customize\Flooring\Floor1.jpg" />
+    <Content Include="Content\Images\B. Customize\Flooring\Floor2.jpg" />
+    <Content Include="Content\Images\B. Customize\Flooring\Floor3.jpg" />
+    <Content Include="Content\Images\B. Customize\Roof\Roof1.jpg" />
+    <Content Include="Content\Images\B. Customize\Roof\Roof2.jpg" />
+    <Content Include="Content\Images\B. Customize\Roof\Roof3.jpg" />
+    <Content Include="Content\Images\B. Customize\step2.png" />
+    <Content Include="Content\Images\B. Customize\step2xs.png" />
+    <Content Include="Content\Images\B. Customize\Windows\window1.jpg" />
+    <Content Include="Content\Images\B. Customize\Windows\window2.jpg" />
+    <Content Include="Content\Images\B. Customize\Windows\window3.jpg" />
+    <Content Include="Content\Images\B. Customize\Windows\window4.jpg" />
+    <Content Include="Content\Images\C. Confirm\step3.png" />
+    <Content Include="Content\Images\D. About\baseboard3.jpg" />
+    <Content Include="Content\Images\D. About\jared.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\RanchStyle.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\OneStory.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\TwoStory.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\SingleFamily.jpg" />
+    <Content Include="Content\Images\HomePage\find.jpg" />
+    <Content Include="Content\Images\HomePage\prints.jpg" />
+    <Content Include="Content\Images\HomePage\wood.jpg" />
+    <Content Include="Content\Images\Navbar\test icon3.png" />
+    <Content Include="Content\kupangaBlue.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -325,6 +359,16 @@
     <Content Include="Views\EmployeeAccess\Index.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_UnhandledQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_QuoteDetails.cshtml" />
+    <Content Include="Views\Home\Confirm.cshtml" />
+    <Content Include="Views\Home\Doors.cshtml" />
+    <Content Include="Views\Home\Feedback.cshtml" />
+    <Content Include="Views\Home\Flooring.cshtml" />
+    <Content Include="Views\Home\OneStory.cshtml" />
+    <Content Include="Views\Home\RanchStyle.cshtml" />
+    <Content Include="Views\Home\Roof.cshtml" />
+    <Content Include="Views\Home\SingleFamily.cshtml" />
+    <Content Include="Views\Home\TwoStory.cshtml" />
+    <Content Include="Views\Home\Windows.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
