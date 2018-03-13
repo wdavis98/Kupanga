@@ -247,10 +247,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\A. Choose\Homes\RanchStyle.jpg" />
+    <Content Include="Content\Images\A. Choose\floorplan.png" />
     <Content Include="Content\Images\A. Choose\Homes\OneStory.jpg" />
-    <Content Include="Content\Images\A. Choose\Homes\TwoStory.jpg" />
+    <Content Include="Content\Images\A. Choose\Homes\RanchStyle.jpg" />
     <Content Include="Content\Images\A. Choose\Homes\SingleFamily.jpg" />
+    <Content Include="Content\Images\A. Choose\Homes\TwoStory.jpg" />
     <Content Include="Content\Images\A. Choose\step1.png" />
     <Content Include="Content\Images\B. Customize\Doors\door1.jpg" />
     <Content Include="Content\Images\B. Customize\Doors\door2.jpg" />
@@ -271,10 +272,13 @@
     <Content Include="Content\Images\C. Confirm\step3.png" />
     <Content Include="Content\Images\D. About\baseboard3.jpg" />
     <Content Include="Content\Images\D. About\jared.jpg" />
-    <Content Include="Content\Images\HomePage\Carousel\RanchStyle.jpg" />
     <Content Include="Content\Images\HomePage\Carousel\OneStory.jpg" />
-    <Content Include="Content\Images\HomePage\Carousel\TwoStory.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\RanchStyle.jpg" />
     <Content Include="Content\Images\HomePage\Carousel\SingleFamily.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\TwoStory.jpg" />
+    <Content Include="Content\Images\HomePage\Choose.png" />
+    <Content Include="Content\Images\HomePage\Confirm.png" />
+    <Content Include="Content\Images\HomePage\Customize.png" />
     <Content Include="Content\Images\HomePage\find.jpg" />
     <Content Include="Content\Images\HomePage\prints.jpg" />
     <Content Include="Content\Images\HomePage\wood.jpg" />
