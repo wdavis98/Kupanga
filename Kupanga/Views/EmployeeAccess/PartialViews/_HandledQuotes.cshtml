@@ -1,9 +1,6 @@
-﻿@model Kupanga.Models.EmployeeAccessViewModel
+﻿@using Microsoft.AspNet.Identity;
+@model Kupanga.Models.EmployeeAccessViewModel
 
-<p>
-    <h4>Unhandled Quotes</h4>
-    @*@Html.ActionLink("Create New", "Create")*@
-</p>
 <table class="table">
     <tr>
         <th>
@@ -20,7 +17,7 @@
 
     @foreach (var item in Model.SubmittedQuotes)
     {
-        if (string.IsNullOrEmpty(item.HandledBy))
+        if (item.HandledBy == User.Identity.GetUserId() && item.Status == 2)
         {
             <tr>
                 <td>
@@ -33,10 +30,10 @@
                     <span>@item.Home.HomeName</span>
                 </td>
                 <td>
-                    <input type="button" data-toggle="modal" data-target="#QuoteDetailsModal" onclick="viewDetails(@item.QuoteId)"  value="Details" />
+                    <input type="button" data-toggle="modal" data-target="#QuoteDetailsModal" onclick="viewDetails(@item.QuoteId)" value="Details" />
                 </td>
             </tr>
-        }
+            }
     }
 
 </table>

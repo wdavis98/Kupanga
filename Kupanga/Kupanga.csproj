@@ -197,10 +197,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ImageConverters.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EmployeeAccessViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Repository\AspNetUser.cs">
+      <DependentUpon>KupangaDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Repository\Category.cs">
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
@@ -208,12 +212,6 @@
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repository\Home.cs">
-      <DependentUpon>KupangaDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Repository\HomeImage.cs">
-      <DependentUpon>KupangaDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Repository\ImageType.cs">
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repository\KupangaDbModel.Context.cs">
@@ -237,9 +235,13 @@
     <Compile Include="Models\Repository\QuoteComponent.cs">
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repository\Status.cs">
+      <DependentUpon>KupangaDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Repository\SubmittedQuote.cs">
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SubmittedQuote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -325,6 +327,12 @@
     <Content Include="Views\EmployeeAccess\Index.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_UnhandledQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_QuoteDetails.cshtml" />
+    <Content Include="Views\EmployeeAccess\PartialViews\_HandledQuotes.cshtml" />
+    <Content Include="Views\EmployeeAccess\PartialViews\_ListComponents.cshtml" />
+    <Content Include="Views\EmployeeAccess\PartialViews\_InactiveQuotes.cshtml" />
+    <Content Include="Views\EmployeeAccess\PartialViews\_ListHomes.cshtml" />
+    <Content Include="Views\EmployeeAccess\CreateHome.cshtml" />
+    <Content Include="Views\EmployeeAccess\CreateHomeImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

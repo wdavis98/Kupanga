@@ -19,5 +19,7 @@ namespace Kupanga.Models.Repository
         public string NotificationText { get; set; }
         public System.DateTime NotificationCreationDate { get; set; }
         public string UserId { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

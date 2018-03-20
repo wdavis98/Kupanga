@@ -1,20 +1,61 @@
 ﻿@model Kupanga.Models.EmployeeAccessViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employee Access";
 }
 
 <br />
 <div class="row">
     <div class="col-lg-6" style="height: 600px">
-        <div class="well" style="height: 50%">
+        <div class="well" style="height: 50%; overflow-x: auto; overflow-y: scroll">
             @Html.Partial("PartialViews/_UnhandledQuotes")
         </div>
-        <div class="well" style="height: 50%">
+        <div class="well" style="height: 50%; overflow-x: auto; overflow-y: scroll">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabHandledQuotes">My Pending Quotes</a></li>
+                <li><a data-toggle="tab" href="#tabInactiveQuotes">Inactive Quotes</a></li>
+            </ul>
 
+            <div class="tab-content">
+                <div id="tabHandledQuotes" class="tab-pane fade in active">
+                    @Html.Partial("PartialViews/_HandledQuotes")
+                </div>
+                <div id="tabInactiveQuotes" class="tab-pane fade">
+                    @Html.Partial("PartialViews/_InactiveQuotes")
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-lg-6" style="height: 620px">
-        <div class="well" style="height: 100%">
+        <div class="well" style="height: 100%; overflow-x: auto; overflow-y: scroll">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabComponents">Components</a></li>
+                <li><a data-toggle="tab" href="#tabHomes">Homes</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="tabComponents" class="tab-pane fade in active">
+                    @Html.Partial("PartialViews/_ListComponents")
+                </div>
+                <div id="tabHomes" class="tab-pane fade in">
+                    @Html.Partial("PartialViews/_ListHomes")
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="QuoteDetailsModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" id="divModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/Scripts/AjaxScripts.js"></script>
