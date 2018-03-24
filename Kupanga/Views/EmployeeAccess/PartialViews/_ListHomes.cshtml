@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity;
+@model Kupanga.Models.EmployeeAccessViewModel
+
+<table class="table">
+    <tr>
+        <th>
+            Home Name
+        </th>
+        <th>
+            Base Price
+        </th>
+        <th>
+            @Html.ActionLink("Add New Home", "CreateHome")
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Homes)
+    {
+        <tr>
+            <td>
+                <span>@item.HomeName</span>
+            </td>
+            <td>
+                <span>@item.BasePrice.ToString("C")</span>
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+

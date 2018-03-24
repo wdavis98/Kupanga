@@ -1,4 +1,5 @@
-﻿@model Kupanga.Models.Repository.SubmittedQuote
+﻿@using Microsoft.AspNet.Identity;
+@model Kupanga.Models.Repository.SubmittedQuote
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Quote for @Model.ContactFirstName @Model.ContactLastName</h4>
@@ -8,23 +9,15 @@
     <div>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.ContactFirstName)
+                Name:
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.ContactFirstName)
+                @Html.DisplayFor(model => model.ContactFirstName) @Html.DisplayFor(model => model.ContactLastName)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.ContactLastName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ContactLastName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ContactEmail)
+                Contact Email:
             </dt>
 
             <dd>
@@ -32,7 +25,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.ContactStreetAddress)
+                Street Address:
             </dt>
 
             <dd>
@@ -40,49 +33,56 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.ContactCity)
+                Contact City:
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.ContactCity)
+                @Html.DisplayFor(model => model.ContactCity), @Html.DisplayFor(model => model.ContactState) @Html.DisplayFor(model => model.ContactZip)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.ContactState)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ContactState)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ContactZip)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ContactZip)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.HandledBy)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.HandledBy)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Home.HomeName)
+                Quoted Home:
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.Home.HomeName)
             </dd>
 
+            <dt>
+                Handled By:
+            </dt>
+            <dd>
+                @if (Model.AspNetUser != null)
+                {
+                    <span>@Model.AspNetUser.UserName</span>
+                }
+                else
+                {
+                    <span>*Not Handled*</span>
+                }
+            </dd>
+
+            <dt>
+                Status:
+            </dt>
+
+            <dd> 
+                @{
+                    @Model.Status1.StatusDescription
+                }
+            </dd>
+
         </dl>
     </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.QuoteId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="modal-footer">
+    @if (Model.AspNetUser == null)
+    {
+        <button type="button" class="btn btn-default" onclick="handleQuote(@Model.QuoteId);">Handle</button>
+    }
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.QuoteId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

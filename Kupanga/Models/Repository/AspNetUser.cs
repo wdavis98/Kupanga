@@ -12,21 +12,30 @@ namespace Kupanga.Models.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class Home
+    public partial class AspNetUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Home()
+        public AspNetUser()
         {
+            this.Notifications = new HashSet<Notification>();
             this.SubmittedQuotes = new HashSet<SubmittedQuote>();
         }
     
-        public int HomeId { get; set; }
-        public string HomeName { get; set; }
-        public string HomeDescription { get; set; }
-        public decimal BasePrice { get; set; }
-        public byte[] Image { get; set; }
-        public byte[] Blueprint { get; set; }
+        public string Id { get; set; }
+        public string Email { get; set; }
+        public bool EmailConfirmed { get; set; }
+        public string PasswordHash { get; set; }
+        public string SecurityStamp { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool PhoneNumberConfirmed { get; set; }
+        public bool TwoFactorEnabled { get; set; }
+        public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
+        public bool LockoutEnabled { get; set; }
+        public int AccessFailedCount { get; set; }
+        public string UserName { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubmittedQuote> SubmittedQuotes { get; set; }
     }

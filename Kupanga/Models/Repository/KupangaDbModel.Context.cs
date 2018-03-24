@@ -27,11 +27,11 @@ namespace Kupanga.Models.Repository
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Component> Components { get; set; }
-        public virtual DbSet<HomeImage> HomeImages { get; set; }
         public virtual DbSet<Home> Homes { get; set; }
-        public virtual DbSet<ImageType> ImageTypes { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<QuoteComponent> QuoteComponents { get; set; }
         public virtual DbSet<SubmittedQuote> SubmittedQuotes { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
     }
 }

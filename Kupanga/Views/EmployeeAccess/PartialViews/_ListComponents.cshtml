@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNet.Identity;
+@model Kupanga.Models.EmployeeAccessViewModel
+
+<table class="table">
+    <tr>
+        <th>
+            Component Name
+        </th>
+        <th>
+            Price/item
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Components)
+    {
+        <tr>
+            <td>
+                <span>@item.ComponentName</span>
+            </td>
+            <td>
+                <span>@item.ComponentPrice.ToString("C")</span>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
