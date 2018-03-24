@@ -47,22 +47,26 @@
             <dd>
                 @Html.DisplayFor(model => model.Home.HomeName)
             </dd>
-            @if (Model.AspNetUser != null)
-            {
-                <dt>
-                    Handled By:
-                </dt>
 
-                <dd>
+            <dt>
+                Handled By:
+            </dt>
+            <dd>
+                @if (Model.AspNetUser != null)
+                {
                     <span>@Model.AspNetUser.UserName</span>
-                </dd>
-            }
+                }
+                else
+                {
+                    <span>*Not Handled*</span>
+                }
+            </dd>
 
             <dt>
                 Status:
             </dt>
 
-            <dd>
+            <dd> 
                 @{
                     @Model.Status1.StatusDescription
                 }
@@ -70,6 +74,13 @@
 
         </dl>
     </div>
+</div>
+<div class="modal-footer">
+    @if (Model.AspNetUser == null)
+    {
+        <button type="button" class="btn btn-default" onclick="handleQuote(@Model.QuoteId);">Handle</button>
+    }
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 @*<p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.QuoteId }) |

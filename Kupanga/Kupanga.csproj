@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -198,6 +199,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ImageConverters.cs" />
+    <Compile Include="Helpers\ValidationMethods.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EmployeeAccessViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -331,8 +333,9 @@
     <Content Include="Views\EmployeeAccess\PartialViews\_ListComponents.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_InactiveQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_ListHomes.cshtml" />
-    <Content Include="Views\EmployeeAccess\CreateHome.cshtml" />
     <Content Include="Views\EmployeeAccess\CreateHomeImage.cshtml" />
+    <Content Include="Views\EmployeeAccess\PartialViews\_CreateHome.cshtml" />
+    <Content Include="Views\EmployeeAccess\CreateHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
