@@ -250,6 +250,45 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\A. Choose\floorplan.png" />
+    <Content Include="Content\Images\A. Choose\Homes\OneStory.jpg" />
+    <Content Include="Content\Images\A. Choose\Homes\RanchStyle.jpg" />
+    <Content Include="Content\Images\A. Choose\Homes\SingleFamily.jpg" />
+    <Content Include="Content\Images\A. Choose\Homes\TwoStory.jpg" />
+    <Content Include="Content\Images\A. Choose\step1.png" />
+    <Content Include="Content\Images\B. Customize\Doors\door1.jpg" />
+    <Content Include="Content\Images\B. Customize\Doors\door2.jpg" />
+    <Content Include="Content\Images\B. Customize\Doors\door3.jpg" />
+    <Content Include="Content\Images\B. Customize\Doors\door4.jpg" />
+    <Content Include="Content\Images\B. Customize\Flooring\floor1.jpg" />
+    <Content Include="Content\Images\B. Customize\Flooring\floor2.jpg" />
+    <Content Include="Content\Images\B. Customize\Flooring\floor3.jpg" />
+    <Content Include="Content\Images\B. Customize\Flooring\floor4.jpg" />
+    <Content Include="Content\Images\B. Customize\Roof\roof1.jpg" />
+    <Content Include="Content\Images\B. Customize\Roof\roof2.jpg" />
+    <Content Include="Content\Images\B. Customize\Roof\roof3.jpg" />
+    <Content Include="Content\Images\B. Customize\Roof\roof4.jpg" />
+    <Content Include="Content\Images\B. Customize\step2.png" />
+    <Content Include="Content\Images\B. Customize\step2xs.png" />
+    <Content Include="Content\Images\B. Customize\Windows\window1.jpg" />
+    <Content Include="Content\Images\B. Customize\Windows\window2.jpg" />
+    <Content Include="Content\Images\B. Customize\Windows\window3.jpg" />
+    <Content Include="Content\Images\B. Customize\Windows\window4.jpg" />
+    <Content Include="Content\Images\C. Confirm\step3.png" />
+    <Content Include="Content\Images\D. About\aboutTitle.jpg" />
+    <Content Include="Content\Images\D. About\jared.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\OneStory.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\RanchStyle.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\SingleFamily.jpg" />
+    <Content Include="Content\Images\HomePage\Carousel\TwoStory.jpg" />
+    <Content Include="Content\Images\HomePage\Choose.png" />
+    <Content Include="Content\Images\HomePage\Confirm.png" />
+    <Content Include="Content\Images\HomePage\Customize.png" />
+    <Content Include="Content\Images\HomePage\find.jpg" />
+    <Content Include="Content\Images\HomePage\prints.jpg" />
+    <Content Include="Content\Images\HomePage\wood.jpg" />
+    <Content Include="Content\Images\Navbar\test icon3.png" />
+    <Content Include="Content\kupangaBlue.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -329,6 +368,18 @@
     <Content Include="Views\EmployeeAccess\Index.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_UnhandledQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_QuoteDetails.cshtml" />
+
+    <Content Include="Views\Home\Confirm.cshtml" />
+    <Content Include="Views\Home\Doors.cshtml" />
+    <Content Include="Views\Home\Feedback.cshtml" />
+    <Content Include="Views\Home\Flooring.cshtml" />
+    <Content Include="Views\Home\OneStory.cshtml" />
+    <Content Include="Views\Home\RanchStyle.cshtml" />
+    <Content Include="Views\Home\Roof.cshtml" />
+    <Content Include="Views\Home\SingleFamily.cshtml" />
+    <Content Include="Views\Home\TwoStory.cshtml" />
+    <Content Include="Views\Home\Windows.cshtml" />
+
     <Content Include="Views\EmployeeAccess\PartialViews\_HandledQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_ListComponents.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_InactiveQuotes.cshtml" />
@@ -336,6 +387,7 @@
     <Content Include="Views\EmployeeAccess\CreateHomeImage.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_CreateHome.cshtml" />
     <Content Include="Views\EmployeeAccess\CreateHome.cshtml" />
+    
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
