@@ -97,6 +97,94 @@ namespace Kupanga.Controllers
             return View(home);
         }
 
+        public ActionResult CreateComponent()
+        {
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComponent([Bind(Include = "ComponentName, CategoryId, ComponentPrice")] Component component, HttpPostedFileBase image)
+        {
+            try
+            {
+                if (image != null)
+                {
+                    MemoryStream target = new MemoryStream();
+                    image.InputStream.CopyTo(target);
+                    component.Image = target.ToArray();
+                    ViewBag.spnHomeImageValidation = string.Empty;
+                }
+                else
+                {
+                    ViewBag.spnHomeImageValidation = "Image cannot be empty";
+                }
+            }
+            catch (Exception)
+            {
+                // Do nothing
+            }
+            if (ModelState.IsValid)
+            {
+                db.Components.Add(component);
+                db.SaveChanges();
+                return RedirectToAction("index");
+            }
+
+            return View(component);
+        }
+
+        [HttpGet]
+
+        public ActionResult EditComponent(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Component component = db.Components.Find(id);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", component.CategoryId);
+            if (component == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(component);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditComponent([Bind(Include = "ComponentName, CategoryId, ComponentPrice")] Component component, HttpPostedFileBase image)
+        {
+            try
+            {
+                if (image != null)
+                {
+                    MemoryStream target = new MemoryStream();
+                    image.InputStream.CopyTo(target);
+                    component.Image = target.ToArray();
+                    ViewBag.spnHomeImageValidation = string.Empty;
+                }
+                else
+                {
+                    ViewBag.spnHomeImageValidation = "Image cannot be empty";
+                }
+            }
+            catch (Exception)
+            {
+                // Do nothing
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(component).State = EntityState.Modified;
+                db.SaveChanges();
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+
+            return View(component);
+        }
+
         public ActionResult HandleQuote(int? id)
         {
             if (id == null)

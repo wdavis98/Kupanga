@@ -33,5 +33,6 @@ namespace Kupanga.Models.Repository
         public virtual DbSet<SubmittedQuote> SubmittedQuotes { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<HomeCategory> HomeCategories { get; set; }
     }
 }

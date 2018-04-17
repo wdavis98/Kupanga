@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity;
 @model Kupanga.Models.EmployeeAccessViewModel
 
+<select></select>
 <table class="table">
     <tr>
         <th>
@@ -9,6 +10,7 @@
         <th>
             Price/item
         </th>
+        <th>@Html.ActionLink("Create New Component","CreateComponent")</th>
     </tr>
 
     @foreach (var item in Model.Components)
@@ -19,6 +21,9 @@
             </td>
             <td>
                 <span>@item.ComponentPrice.ToString("C")</span>
+            </td>
+            <td>
+                <span>@Html.ActionLink("Edit", "EditComponent", new { id = item.ComponentId })</span>
             </td>
         </tr>
     }

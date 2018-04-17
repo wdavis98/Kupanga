@@ -39,6 +39,13 @@
           <Property Name="Image" Type="image" />
           <Property Name="ComponentPrice" Type="decimal" Precision="9" Scale="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="HomeCategories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Homes">
           <Key>
             <PropertyRef Name="HomeId" />
@@ -49,6 +56,7 @@
           <Property Name="Image" Type="image" />
           <Property Name="Blueprint" Type="image" />
           <Property Name="BasePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -99,6 +107,18 @@
               <PropertyRef Name="CategoryId" />
             </Principal>
             <Dependent Role="Components">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Homes_HomeCategories">
+          <End Role="HomeCategories" Type="Self.HomeCategories" Multiplicity="1" />
+          <End Role="Homes" Type="Self.Homes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HomeCategories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Homes">
               <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
@@ -179,6 +199,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeCategories" EntityType="Self.HomeCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Homes" EntityType="Self.Homes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuoteComponents" EntityType="Self.QuoteComponents" Schema="dbo" store:Type="Tables" />
@@ -187,6 +208,10 @@
           <AssociationSet Name="FK_Components_Categories" Association="Self.FK_Components_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Homes_HomeCategories" Association="Self.FK_Homes_HomeCategories">
+            <End Role="HomeCategories" EntitySet="HomeCategories" />
+            <End Role="Homes" EntitySet="Homes" />
           </AssociationSet>
           <AssociationSet Name="FK_Notifications_AspNetUsers" Association="Self.FK_Notifications_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -248,6 +273,8 @@
           <NavigationProperty Name="SubmittedQuotes" Relationship="KupangaModel.FK_SubmittedQuotes_Homes" FromRole="Home" ToRole="SubmittedQuote" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Blueprint" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HomeCategory" Relationship="KupangaModel.FK_Homes_HomeCategories" FromRole="Home" ToRole="HomeCategory" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -308,6 +335,11 @@
           <AssociationSet Name="FK_SubmittedQuotes_Status" Association="KupangaModel.FK_SubmittedQuotes_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="SubmittedQuote" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+          <EntitySet Name="HomeCategories" EntityType="KupangaModel.HomeCategory" />
+          <AssociationSet Name="FK_Homes_HomeCategories" Association="KupangaModel.FK_Homes_HomeCategories">
+            <End Role="HomeCategory" EntitySet="HomeCategories" />
+            <End Role="Home" EntitySet="Homes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="QuoteComponent">
@@ -439,6 +471,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="HomeCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Homes" Relationship="KupangaModel.FK_Homes_HomeCategories" FromRole="HomeCategory" ToRole="Home" />
+        </EntityType>
+        <Association Name="FK_Homes_HomeCategories">
+          <End Type="KupangaModel.HomeCategory" Role="HomeCategory" Multiplicity="1" />
+          <End Type="KupangaModel.Home" Role="Home" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HomeCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Home">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -467,6 +519,7 @@
           <EntitySetMapping Name="Homes">
             <EntityTypeMapping TypeName="KupangaModel.Home">
               <MappingFragment StoreEntitySet="Homes">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Blueprint" ColumnName="Blueprint" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="HomeId" ColumnName="HomeId" />
@@ -536,6 +589,14 @@
               <MappingFragment StoreEntitySet="Status">
                 <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeCategories">
+            <EntityTypeMapping TypeName="KupangaModel.HomeCategory">
+              <MappingFragment StoreEntitySet="HomeCategories">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

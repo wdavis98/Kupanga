@@ -1,220 +1,83 @@
-﻿
-@{
-	/**/
+﻿@model Kupanga.Models.HomesViewModel
 
-	ViewBag.Title = "Customize";
+@{
+    ViewBag.Title = "Two Story Homes";
 }
+<style>
+    .center-pills {
+        display: inline-block;
+    }
+</style>
 <div class="container-fluid">
-	<div class="modal fade" id="imgModal" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-					<h4 class="modal-title" id="myModalLabel">Image preview</h4>
-				</div>
-				<div class="modal-body">
-					<div class="hidden-xs">
-						<img src="" id="imgPreview" class="imgModalView">
-					</div>
-					<div class="visible-xs">
-						<img src="" id="imgPreviewXs" class="imgModalViewXs">
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="modal fade" id="homeDetailsModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div id="HomeDetailsContent"></div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <img style="width:100%;height:200px;" src="~/Content/Images/A. Choose/step1.png" alt="One Story Homes">
+    </div>
 </div>
 <div class="row">
-	<div class="col-md-12">
-		<img class="formatImg hidden-xs" src="~/Content/Images/A. Choose/step1.png" alt="One Story Homes">
-		<img class="formatImg visible-xs" src="~/Content/Images/A. Choose/step1.png" alt="One Story Homes">
-	</div>
-</div>
-<br />
-<div class="row">
-	<div class="col-md-12">
-		<h2 class="pillHeader">Choose From One of The Categories Below!</h2>
-	</div>
+    <div class="col-md-12">
+        <h2 style="text-align:center;background-color:grey;color:white;">Choose From One of The Categories Below!</h2>
+    </div>
 </div>
 <div class="col-md-12 text-center">
-	<ul class="nav nav-pills center-pills">
-		<li>@Html.ActionLink("One-Story Homes", "OneStory", "Home")</li>
-		<li class="active">@Html.ActionLink("Two-Story Homes", "TwoStory", "Home")</li>
-		<li>@Html.ActionLink("Single-Family Homes", "SingleFamily", "Home")</li>
-		<li>@Html.ActionLink("Ranch Style Homes", "RanchStyle", "Home")</li>
-	</ul>
+    <ul class="nav nav-pills center-pills">
+        <li>@Html.ActionLink("One-Story Homes", "OneStory", "Home")</li>
+        <li class="active">@Html.ActionLink("Two-Story Homes", "TwoStory", "Home")</li>
+        <li>@Html.ActionLink("Single-Family Homes", "SingleFamily", "Home")</li>
+        <li>@Html.ActionLink("Ranch Style Homes", "RanchStyle", "Home")</li>
+    </ul>
 </div>
-@{
-	// Count the number of ids in the file
-	int fileCount = 9;
-	// Set other variables
-	int count = 0;
-	var x = 0;
-	var itemCount = 1;
-	if ((fileCount % 3) == 0)
-	{
-		count = fileCount / 3;
-	}
-	else
-	{
-		count = (fileCount / 3) + 1;
-	}
-	while (x < count)
-	{
-		if (x == (count - 1))
-		{
-			if ((fileCount % 3) == 1)
-			{
-				itemCount = 2;
-			}
-			else if ((fileCount % 3) == 2)
-			{
-				itemCount = 3;
-			}
-			else
-			{
-				itemCount = 4;
-			}
-		}
-		else
-		{
-			itemCount = 4;
-		}
-		<div class="row visible-lg">
-			@{var a = 1;
-				while (a < itemCount)
-				{
-					<div class="col-xs-4">
-						<div class="card">
-							<div class="descriptionHeaderColor">
-								<h2 class="descriptionHeader">House @(a)</h2>
-								<p class="descriptionHeader">Price<span class="pull-right">$100,000&nbsp;</span></p>
-							</div>
-							<label class="addPointer"><input class="imgClick" type="radio" name="imgSelectName" value="@(a)"><img id="imgSource@(a)" class="card-img-top formatImgLg" src="~/Content/Images/A. Choose/Homes/TwoStory.jpg" alt="Card image cap" /></label>
-							<div class="card-body">
-								<div class="row">
-									<div class="col-md-6">
-										<p style="padding-top:10px;padding-left:20px;"><b>2073</b> sq ft</p>
-										<hr />
-										<span style="padding-top:10px;padding-left:20px;"><b>2</b> car garage</span>
-									</div>
-									<div class="col-md-6">
-										<p style="padding-top:10px;padding-left:20px;"><b>3</b> beds</p>
-										<hr />
-										<span style="padding-top:10px;padding-left:20px;"><b>2</b> bath</span>
-									</div>
-								</div>
-								<br />
-								<!--<p class="card-title" style="padding-top:10px;padding-left:20px;"><b>2073</b> sq ft</p>-->
-								<div class="row">
-									<div class="col-md-6">
-										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Floor Plan &raquo;</button>
-									</div>
-									<div class="col-md-6 text-right">
-										<!--<p><button class="btn btn-default toggle-floor">Floor Plan &raquo;</button></p>-->
-										<p><a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					a += 1;
-				}
-			}
-		</div>
-		<div class="row hidden-lg hidden-xs">
-			@{var b = 1;
-				while (b < itemCount)
-				{
-					<div class="col-xs-3">
-						<div class="card">
-							<div class="descriptionHeaderColor">
-								<h2 class="descriptionHeader">hdWindow @(b)</h2>
-								<p class="descriptionHeader">Per Window<span class="pull-right">$100&nbsp;</span></p>
-							</div>
-							<label class="addPointer"><input class="imgClick" type="radio" name="imgSelectName" value="@(b)"><img id="imgSource@(b)" class="card-img-top formatImg" src="~/Content/Images/B. Customize/Windows/window@(b).jpg" alt="Card image cap" /></label>
-							<div class="card-body text-center">
-								<br />
-								<label id="label@(b)" class="btn btn-primary resetLabel"><input class="buttonSelect" type="radio" name="buttonSelectName" value="@(b)"><span id="span@(b)" class="resetSpan">Select &raquo;</span></label>
-							</div>
-						</div>
-					</div>
-					b += 1;
-				}
-			}
-		</div>
-		<div class="row visible-xs">
-			@{
-				var c = 1;
-				while (c < itemCount)
-				{
-					<div class="col-xs-6 text-center">
-						<div class="card">
-							<div class="descriptionHeaderColor">
-								<h2 class="descriptionHeader">xsWindow @(c)</h2>
-								<p class="descriptionHeader">Per Window<span class="pull-right">$100&nbsp;</span></p>
-							</div>
-							<label class="addPointer"><input class="imgClick" type="radio" name="imgSelectName" value="@(c)"><img id="imgSource@(c)" class="card-img-top formatImgXs" src="~/Content/Images/B. Customize/Windows/window@(c).jpg" alt="Card image cap" /></label>
-							<div class="card-body text-center">
-								<br />
-								<label id="label@(c)" class="btn btn-primary resetLabel"><input class="buttonSelect" type="radio" name="buttonSelectName" value="@(c)"><span id="span@(c)" class="resetSpan">Select &raquo;</span></label>
-							</div>
-						</div>
-					</div>
-					c += 1;
-				}
-			}
-		</div>
-		<div class="row visible-xs">
-			@{
-				while (c < itemCount)
-				{
-					<div class="col-xs-6 text-center">
-						<div class="card">
-							<div class="descriptionHeaderColor">
-								<h2 class="descriptionHeader">xsWindow @(c)</h2>
-								<p class="descriptionHeader">Per Window<span class="pull-right">$100&nbsp;</span></p>
-							</div>
-							<label class="addPointer"><input class="imgClick" type="radio" name="imgSelectName" value="@(c)"><img id="imgSource@(c)" class="card-img-top formatImgXs" src="~/Content/Images/B. Customize/Windows/window@(c).jpg" alt="Card image cap" /></label>
-							<div class="card-body text-center">
-								<br />
-								<label id="label@(c)" class="btn btn-primary resetLabel"><input class="buttonSelect" type="radio" name="buttonSelectName" value="@(c)"><span id="span@(c)" class="resetSpan">Select &raquo;</span></label>
-							</div>
-						</div>
-					</div>
-					c += 1;
-				}
-			}
-		</div>
-		if (x == (count - 1))
-		{
-			if ((fileCount % 3) == 1)
-			{
-				<div class="col-xs-8"></div>
-			}
-			else if ((fileCount % 3) == 2)
-			{
-				<div class="col-xs-4"></div>
-			}
-		}
-		x += 1;
-	}
-}
-<script src="/Scripts/jquery-1.10.2.js"></script>
-<script src="/Scripts/respond.js"></script>
+<div>
+    @foreach (var home in Model.Homes)
+    {
+        string imgSrc;
+        if (home.Image != null && home.Image.Length > 0)
+        {
+            var base64 = Convert.ToBase64String(home.Image);
+            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+        }
+        else
+        {
+            imgSrc = "/Content/Images/Error/NotFound.png";
+        }
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div style="background-color:gray;">
+                    <h2 style="color:white;padding-left:10px;">@home.HomeName</h2>
+                </div>
+                <div style="text-align:center;"><img class="card-img-top" style="height: 15em;" src="@(imgSrc)" alt="@home.HomeName"></div>
+                <div class="card-body">
+                    <p style="height: 3em; overflow:hidden" class="card-text">@home.HomeDescription</p>
+                    <br />
+                    <input class="btn btn-info" type="button" data-toggle="modal" data-target="#homeDetailsModal" onclick="viewHomeDetails(@home.HomeId)" value="Details" />
+                    <a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@Scripts.Render("~/bundles/jquery")
 <script>
-	$(".imgClick").on("click", function () {
-		var vImgId = $('input[name=imgSelectName]:checked').val();
-		// Assign image to modal
-		$('#imgPreview').attr('src', $('#imgSource' + vImgId).attr('src'));
-		$('#imgPreviewXs').attr('src', $('#imgSourceXs' + vImgId).attr('src'));
-		// open modal
-		$('#imgModal').modal('show');
-		// So it doesn't scroll to top of page
-		return false;
-	});
+    $(function () {
+        $('.toggle-floor').click(function (e) {
+            e.preventDefault();
+            $("#floor-image").attr('src', "/Content/Images/A. Choose/floorplan.png");
+        });
+    });
 </script>
 

@@ -201,7 +201,9 @@
     <Compile Include="Helpers\ImageConverters.cs" />
     <Compile Include="Helpers\ValidationMethods.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ComponentsViewModel.cs" />
     <Compile Include="Models\EmployeeAccessViewModel.cs" />
+    <Compile Include="Models\HomesViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Repository\AspNetUser.cs">
@@ -214,6 +216,9 @@
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repository\Home.cs">
+      <DependentUpon>KupangaDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Repository\HomeCategory.cs">
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repository\KupangaDbModel.Context.cs">
@@ -316,6 +321,7 @@
     <Content Include="Models\Repository\KupangaDbModel.edmx.diagram">
       <DependentUpon>KupangaDbModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -368,7 +374,6 @@
     <Content Include="Views\EmployeeAccess\Index.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_UnhandledQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_QuoteDetails.cshtml" />
-
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\Home\Doors.cshtml" />
     <Content Include="Views\Home\Feedback.cshtml" />
@@ -379,15 +384,15 @@
     <Content Include="Views\Home\SingleFamily.cshtml" />
     <Content Include="Views\Home\TwoStory.cshtml" />
     <Content Include="Views\Home\Windows.cshtml" />
-
     <Content Include="Views\EmployeeAccess\PartialViews\_HandledQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_ListComponents.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_InactiveQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_ListHomes.cshtml" />
-    <Content Include="Views\EmployeeAccess\CreateHomeImage.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_CreateHome.cshtml" />
     <Content Include="Views\EmployeeAccess\CreateHome.cshtml" />
-    
+    <Content Include="Views\EmployeeAccess\CreateComponent.cshtml" />
+    <Content Include="Views\EmployeeAccess\EditComponent.cshtml" />
+    <Content Include="Views\Home\PartialViews\_HomeDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

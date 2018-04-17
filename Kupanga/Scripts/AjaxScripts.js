@@ -1,4 +1,16 @@
-﻿function viewDetails(id) {
+﻿function viewHomeDetails(id) {
+    $("#HomeDetailsContent").html("Loading...");
+    $.ajax({
+        url: "/Home/HomeDetails",
+        cache: false,
+        type: "POST",
+        data: { id: id },
+        success: function (html) {
+            $("#HomeDetailsContent").html(html);
+        }
+    });
+}
+function viewDetails(id) {
     $("#divModalBody").html("Loading...");
     $.ajax({
         url: "/EmployeeAccess/QuoteDetails",

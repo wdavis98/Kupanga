@@ -38,9 +38,9 @@ textarea {
 }
 
 .pillHeader {
-	text-align: center;
-	background-color: grey;
-	color: white;
+    text-align: center;
+    background-color: gray;
+    color: white;
 }
 
 .center-pills {
@@ -48,12 +48,12 @@ textarea {
 }
 
 .descriptionHeaderColor {
-	background-color: gray;
+    background-color: gray;
 }
 
 .descriptionHeaderColorXs {
-	background-color: gray;
-	width: 150px;
+    background-color: gray;
+    width: 150px;
 }
 
 .descriptionHeader {

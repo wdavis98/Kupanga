@@ -12,24 +12,18 @@ namespace Kupanga.Models.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class Home
+    public partial class HomeCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Home()
+        public HomeCategory()
         {
-            this.SubmittedQuotes = new HashSet<SubmittedQuote>();
+            this.Homes = new HashSet<Home>();
         }
     
-        public int HomeId { get; set; }
-        public string HomeName { get; set; }
-        public string HomeDescription { get; set; }
-        public decimal BasePrice { get; set; }
-        public byte[] Image { get; set; }
-        public byte[] Blueprint { get; set; }
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubmittedQuote> SubmittedQuotes { get; set; }
-        public virtual HomeCategory HomeCategory { get; set; }
+        public virtual ICollection<Home> Homes { get; set; }
     }
 }

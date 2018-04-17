@@ -20,6 +20,8 @@
         <AssociationConnector Association="KupangaModel.FK_Notifications_AspNetUsers" />
         <AssociationConnector Association="KupangaModel.FK_SubmittedQuotes_AspNetUsers" />
         <AssociationConnector Association="KupangaModel.FK_SubmittedQuotes_Status" />
+        <EntityTypeShape EntityType="KupangaModel.HomeCategory" Width="1.5" PointX="0.75" PointY="14.75" />
+        <AssociationConnector Association="KupangaModel.FK_Homes_HomeCategories" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

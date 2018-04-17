@@ -1,157 +1,83 @@
-﻿
+﻿@model Kupanga.Models.HomesViewModel
 
 @{
-	ViewBag.Title = "OneStory";
+    ViewBag.Title = "One Story Homes";
 }
 <style>
-	.center-pills {
-		display: inline-block;
-	}
+    .center-pills {
+        display: inline-block;
+    }
 </style>
 <div class="container-fluid">
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<img style="height:550px;width:550px;text-align:center;" src="~/Content/Images/A. Choose/floorplan.png" />
-				<br />
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
+    <div class="modal fade" id="homeDetailsModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div id="HomeDetailsContent"></div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
 
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<img style="width:100%;height:200px;" src="~/Content/Images/A. Choose/step1.png" alt="One Story Homes">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<h2 style="text-align:center;background-color:grey;color:white;">Choose From One of The Categories Below!</h2>
-		</div>
-	</div>
-	<div class="col-md-12 text-center">
-		<ul class="nav nav-pills center-pills">
-			<li class="active">@Html.ActionLink("One-Story Homes", "OneStory", "Home")</li>
-			<li>@Html.ActionLink("Two-Story Homes", "TwoStory", "Home")</li>
-			<li>@Html.ActionLink("Single-Family Homes", "SingleFamily", "Home")</li>
-			<li>@Html.ActionLink("Ranch Style Homes", "RanchStyle", "Home")</li>
-		</ul>
-	</div>
-	<div class="row">
-		<div class="col-sm-4">
-			<div class="card" style="width: 33rem;">
-				<div style="background-color:gray;">
-					<h2 style="color:white;padding-left:10px;">Delphos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$100,000</h2>
-				</div>
-				<img class="card-img-top" id="floor-image" style="width: 33rem;height: 15em;" src="~/Content/Images/A. Choose/Homes/OneStory.jpg" alt="Card image cap">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-md-6">
-							<p style="padding-top:10px;padding-left:20px;"><b>2073</b> sq ft</p>
-							<hr />
-							<span style="padding-top:10px;padding-left:20px;"><b>2</b> car garage</span>
-						</div>
-						<div class="col-md-6">
-							<p style="padding-top:10px;padding-left:20px;"><b>3</b> beds</p>
-							<hr />
-							<span style="padding-top:10px;padding-left:20px;"><b>2</b> bath</span>
-						</div>
-					</div>
-					<br />
-					<!--<p class="card-title" style="padding-top:10px;padding-left:20px;"><b>2073</b> sq ft</p>-->
-					<div class="row">
-						<div class="col-md-6">
-							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Floor Plan &raquo;</button>
-						</div>
-						<div class="col-md-6 text-right">
-							<!--<p><button class="btn btn-default toggle-floor">Floor Plan &raquo;</button></p>-->
-							<p><a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card" style="width: 33rem;">
-				<div style="background-color:gray;">
-					<h2 style="color:white;padding-left:10px;">House 2</h2>
-				</div>
-				<img class="card-img-top" style="width: 33rem;height: 15em;" src="~/Content/Images/A. Choose/Homes/OneStory.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<p><a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a></p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card" style="width: 33rem;">
-				<div style="background-color:gray;">
-					<h2 style="color:white;padding-left:10px;">House 3</h2>
-				</div>
-				<img class="card-img-top" style="width: 33rem;height: 15em;" src="~/Content/Images/A. Choose/Homes/OneStory.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<p><a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-4">
-			<div class="card" style="width: 33rem;">
-				<div style="background-color:gray;">
-					<h2 style="color:white;padding-left:10px;">House 1</h2>
-				</div>
-				<img class="card-img-top" style="width: 33rem;height: 15em;" src="~/Content/Images/A. Choose/Homes/OneStory.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<p><a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a></p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card" style="width: 33rem;">
-				<div style="background-color:gray;">
-					<h2 style="color:white;padding-left:10px;">House 2</h2>
-				</div>
-				<img class="card-img-top" style="width: 33rem;height: 15em;" src="~/Content/Images/A. Choose/Homes/OneStory.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<p><a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a></p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card" style="width: 33rem;">
-				<div style="background-color:gray;">
-					<h2 style="color:white;padding-left:10px;">House 3</h2>
-				</div>
-				<img class="card-img-top" style="width: 33rem;height: 15em;" src="~/Content/Images/A. Choose/Homes/OneStory.jpg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<p><a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <img style="width:100%;height:200px;" src="~/Content/Images/A. Choose/step1.png" alt="One Story Homes">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2 style="text-align:center;background-color:grey;color:white;">Choose From One of The Categories Below!</h2>
+    </div>
+</div>
+<div class="col-md-12 text-center">
+    <ul class="nav nav-pills center-pills">
+        <li class="active">@Html.ActionLink("One-Story Homes", "OneStory", "Home")</li>
+        <li>@Html.ActionLink("Two-Story Homes", "TwoStory", "Home")</li>
+        <li>@Html.ActionLink("Single-Family Homes", "SingleFamily", "Home")</li>
+        <li>@Html.ActionLink("Ranch Style Homes", "RanchStyle", "Home")</li>
+    </ul>
+</div>
+<div>
+    @foreach (var home in Model.Homes)
+    {
+        string imgSrc;
+        if (home.Image != null && home.Image.Length > 0)
+        {
+            var base64 = Convert.ToBase64String(home.Image);
+            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+        }
+        else
+        {
+            imgSrc = "/Content/Images/Error/NotFound.png";
+        }
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="card" >
+                <div style="background-color:gray;">
+                    <h2 style="color:white;padding-left:10px;">@home.HomeName</h2>
+                </div>
+                <div style="text-align:center;"><img class="card-img-top" style="height: 15em;" src="@(imgSrc)" alt="@home.HomeName"></div>
+                <div class="card-body">
+                    <p style="height: 3em; overflow:hidden" class="card-text">@home.HomeDescription</p>
+                    <br />
+                    <input class="btn btn-info" type="button" data-toggle="modal" data-target="#homeDetailsModal" onclick="viewHomeDetails(@home.HomeId)" value="Details" />
+                    <a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a>
+                </div>
+            </div>
+        </div>
+    }
+
 </div>
 @Scripts.Render("~/bundles/jquery")
 <script>
-		$(function () {
-			$('.toggle-floor').click(function (e) {
-				e.preventDefault();
-				$("#floor-image").attr('src', "/Content/Images/A. Choose/floorplan.png");
-			});
-		});
+    $(function () {
+        $('.toggle-floor').click(function (e) {
+            e.preventDefault();
+            $("#floor-image").attr('src', "/Content/Images/A. Choose/floorplan.png");
+        });
+    });
 </script>
-@*<div class="row text-center">
-		<p><a class="btn btn-primary" href="@Url.Action("Customize", "Home")">Continue &raquo;</a></p>
-	</div>*@
 

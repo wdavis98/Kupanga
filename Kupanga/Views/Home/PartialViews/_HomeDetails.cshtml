@@ -1,0 +1,58 @@
+﻿@model Kupanga.Models.Repository.Home
+
+@{
+    string imgSrc;
+    if (Model.Image != null && Model.Image.Length > 0)
+    {
+        var base64 = Convert.ToBase64String(Model.Image);
+        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
+    else
+    {
+        imgSrc = "/Content/Images/Error/NotFound.png";
+    }
+
+    string blueprintSrc;
+    if (Model.Image != null && Model.Image.Length > 0)
+    {
+        var base64 = Convert.ToBase64String(Model.Image);
+        blueprintSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
+    else
+    {
+        blueprintSrc = "/Content/Images/Error/NotFound.png";
+    }
+
+}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Details for @Model.HomeName</h4>
+</div>
+<br />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Base Price:
+        </dt>
+
+        <dd>
+            @Model.BasePrice
+        </dd>
+        <dt>
+            Home Category:
+        </dt>
+
+        <dd>
+            @Model.HomeCategory.CategoryName
+        </dd>
+    </dl>
+</div>
+<div style="text-align:center;">
+    <img class="card-img-top" style="max-height: 20em; max-width: 100%;" src="@(imgSrc)" alt="@Model.HomeName">
+</div>
+<br />
+<div style="text-align:center;">
+    <img style="height:20em;max-width:100%;text-align:center;" src="@(blueprintSrc)" />
+</div>
+<br />
+<p>@Model.HomeDescription</p>
