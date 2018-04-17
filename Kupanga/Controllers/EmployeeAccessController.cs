@@ -8,9 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using Kupanga.Models;
 using Kupanga.Models.Repository;
+using System.Drawing;
+using System.IO;
+using Kupanga.Helpers;
+using Microsoft.AspNet.Identity;
 
 namespace Kupanga.Controllers
 {
+    [Authorize]
     public class EmployeeAccessController : Controller
     {
         private KupangaEntities db = new KupangaEntities();
@@ -20,6 +25,8 @@ namespace Kupanga.Controllers
         {
             EmployeeAccessViewModel viewModel = new EmployeeAccessViewModel();
             viewModel.SubmittedQuotes = db.SubmittedQuotes.ToList();
+            viewModel.Components = db.Components.ToList();
+            viewModel.Homes = db.Homes.ToList();
             return View(viewModel);
         }
 
@@ -39,79 +46,88 @@ namespace Kupanga.Controllers
             {
                 return HttpNotFound();
             }
-            return View("PartialViews/_QuoteDetails",quote);
+            return PartialView("PartialViews/_QuoteDetails", quote);
         }
 
-        // GET: EmployeeAccess/Details/5
-        public ActionResult Details(int id)
+        public ActionResult CreateHome()
         {
+            //ViewBag.SongbookId = new SelectList(db.Songbooks, "SongbookId", "SongbookName");
             return View();
         }
 
-        // GET: EmployeeAccess/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: EmployeeAccess/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateHome([Bind(Include = "HomeName, HomeDescription, BasePrice")] Home home, HttpPostedFileBase image, HttpPostedFileBase blueprint)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (image != null)
+                {
+                    MemoryStream target = new MemoryStream();
+                    image.InputStream.CopyTo(target);
+                    home.Image = target.ToArray();
+                    ViewBag.spnHomeImageValidation = string.Empty;
+                }
+                else
+                {
+                    ViewBag.spnHomeImageValidation = "Image cannot be empty";
+                }
+                if (blueprint != null)
+                {
+                    MemoryStream target = new MemoryStream();
+                    blueprint.InputStream.CopyTo(target);
+                    home.Blueprint = target.ToArray();
+                    ViewBag.spnHomeBlueprintValidation = string.Empty;
+                }
+                {
+                    ViewBag.spnHomeBlueprintValidation = "Floor plan cannot be empty";
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                // Do nothing
             }
+            if (ModelState.IsValid)
+            {
+                db.Homes.Add(home);
+                db.SaveChanges();
+                return RedirectToAction("index");
+            }
+
+            return View(home);
         }
 
-        // GET: EmployeeAccess/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult HandleQuote(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SubmittedQuote quote = db.SubmittedQuotes.Find(id);
+            if (quote == null)
+            {
+                return HttpNotFound();
+            }
+            quote.HandledBy = User.Identity.GetUserId();
+            quote.Status = 2;
+            if (ModelState.IsValid)
+            {
+                db.Entry(quote).State = EntityState.Modified;
+                db.SaveChanges();
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            return View("index");
         }
 
-        // POST: EmployeeAccess/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        protected override void Dispose(bool disposing)
         {
-            try
+            if (disposing)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                db.Dispose();
             }
-            catch
-            {
-                return View();
-            }
+            base.Dispose(disposing);
         }
 
-        // GET: EmployeeAccess/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: EmployeeAccess/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

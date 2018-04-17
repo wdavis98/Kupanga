@@ -12,18 +12,18 @@ namespace Kupanga.Models.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class ImageType
+    public partial class Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ImageType()
+        public Status()
         {
-            this.HomeImages = new HashSet<HomeImage>();
+            this.SubmittedQuotes = new HashSet<SubmittedQuote>();
         }
     
-        public int ImageTypeId { get; set; }
-        public string ImageTypeName { get; set; }
+        public int StatusId { get; set; }
+        public string StatusDescription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HomeImage> HomeImages { get; set; }
+        public virtual ICollection<SubmittedQuote> SubmittedQuotes { get; set; }
     }
 }

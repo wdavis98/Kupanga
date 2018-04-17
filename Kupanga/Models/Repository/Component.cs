@@ -24,6 +24,7 @@ namespace Kupanga.Models.Repository
         public int CategoryId { get; set; }
         public string ComponentName { get; set; }
         public decimal ComponentPrice { get; set; }
+        public byte[] Image { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

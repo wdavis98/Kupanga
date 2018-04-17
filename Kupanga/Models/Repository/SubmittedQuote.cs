@@ -30,9 +30,12 @@ namespace Kupanga.Models.Repository
         public string ContactZip { get; set; }
         public string HandledBy { get; set; }
         public int HomeId { get; set; }
+        public int Status { get; set; }
     
         public virtual Home Home { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuoteComponent> QuoteComponents { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Status Status1 { get; set; }
     }
 }
