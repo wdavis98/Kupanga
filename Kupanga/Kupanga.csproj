@@ -261,20 +261,24 @@
     <Content Include="Content\Images\B. Customize\Doors\door2.jpg" />
     <Content Include="Content\Images\B. Customize\Doors\door3.jpg" />
     <Content Include="Content\Images\B. Customize\Doors\door4.jpg" />
+    <Content Include="Content\Images\B. Customize\Doors\door5.jpg" />
     <Content Include="Content\Images\B. Customize\Flooring\floor1.jpg" />
     <Content Include="Content\Images\B. Customize\Flooring\floor2.jpg" />
     <Content Include="Content\Images\B. Customize\Flooring\floor3.jpg" />
     <Content Include="Content\Images\B. Customize\Flooring\floor4.jpg" />
+    <Content Include="Content\Images\B. Customize\Flooring\floor5.jpg" />
     <Content Include="Content\Images\B. Customize\Roof\roof1.jpg" />
     <Content Include="Content\Images\B. Customize\Roof\roof2.jpg" />
     <Content Include="Content\Images\B. Customize\Roof\roof3.jpg" />
     <Content Include="Content\Images\B. Customize\Roof\roof4.jpg" />
+    <Content Include="Content\Images\B. Customize\Roof\roof5.jpg" />
     <Content Include="Content\Images\B. Customize\step2.png" />
     <Content Include="Content\Images\B. Customize\step2xs.png" />
     <Content Include="Content\Images\B. Customize\Windows\window1.jpg" />
     <Content Include="Content\Images\B. Customize\Windows\window2.jpg" />
     <Content Include="Content\Images\B. Customize\Windows\window3.jpg" />
     <Content Include="Content\Images\B. Customize\Windows\window4.jpg" />
+    <Content Include="Content\Images\B. Customize\Windows\window5.jpg" />
     <Content Include="Content\Images\C. Confirm\step3.png" />
     <Content Include="Content\Images\C. Confirm\step3xs.png" />
     <Content Include="Content\Images\D. About\aboutTitle.jpg" />
@@ -370,7 +374,6 @@
     <Content Include="Views\EmployeeAccess\Index.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_UnhandledQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_QuoteDetails.cshtml" />
-
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\Home\Doors.cshtml" />
     <Content Include="Views\Home\Feedback.cshtml" />
@@ -381,7 +384,6 @@
     <Content Include="Views\Home\SingleFamily.cshtml" />
     <Content Include="Views\Home\TwoStory.cshtml" />
     <Content Include="Views\Home\Windows.cshtml" />
-
     <Content Include="Views\EmployeeAccess\PartialViews\_HandledQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_ListComponents.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_InactiveQuotes.cshtml" />
@@ -389,7 +391,6 @@
     <Content Include="Views\EmployeeAccess\CreateHomeImage.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_CreateHome.cshtml" />
     <Content Include="Views\EmployeeAccess\CreateHome.cshtml" />
-    
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
