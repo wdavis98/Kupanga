@@ -282,7 +282,9 @@
     <Content Include="Content\Images\C. Confirm\step3.png" />
     <Content Include="Content\Images\C. Confirm\step3xs.png" />
     <Content Include="Content\Images\D. About\aboutTitle.jpg" />
+    <Content Include="Content\Images\D. About\Contact Page.jpg" />
     <Content Include="Content\Images\D. About\jared.jpg" />
+    <Content Include="Content\Images\D. About\Kupanga Homes Logo Test.jpg" />
     <Content Include="Content\Images\HomePage\Carousel\OneStory.jpg" />
     <Content Include="Content\Images\HomePage\Carousel\RanchStyle.jpg" />
     <Content Include="Content\Images\HomePage\Carousel\SingleFamily.jpg" />
@@ -376,7 +378,6 @@
     <Content Include="Views\EmployeeAccess\PartialViews\_QuoteDetails.cshtml" />
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\Home\Doors.cshtml" />
-    <Content Include="Views\Home\Feedback.cshtml" />
     <Content Include="Views\Home\Flooring.cshtml" />
     <Content Include="Views\Home\OneStory.cshtml" />
     <Content Include="Views\Home\RanchStyle.cshtml" />

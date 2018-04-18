@@ -4,7 +4,7 @@
 <style>
 	.centered {
 		position: absolute;
-		top: 50%;
+		top: 30%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
@@ -15,8 +15,8 @@
 </style>
 <div class="row">
 	<div class="col-md-12">
-		<img style="width:100%;height:200px;" src="~/Content/Images/D. About/baseboard3.jpg" alt="One Story Homes">
-		<div class="centered"><h1 style="color:black;font-family:cortado;">KUPANGA MAKES IT EASY</h1></div>
+		<img style="width:100%;height:200px;" src="~/Content/Images/D. About/aboutTitle.jpg" alt="One Story Homes">
+		<div class="centered"><h1 style="color:white;font-family:cortado;">KUPANGA MAKES IT EASY</h1></div>
 	</div>
 </div>
 <br />
@@ -24,12 +24,21 @@
 	<ul class="nav nav-pills center-pills">
 		<li>@Html.ActionLink("About", "About", "Home")</li>
 		<li class="active">@Html.ActionLink("Contact Us", "Contact", "Home")</li>
-		<li>@Html.ActionLink("Feedback", "Feedback", "Home")</li>
 	</ul>
 </div>
 <br />
-<p>Use this area to provide additional information. Testing</p>
-
+<div class="col-md-8">
+	<h1>What Kupanga is About</h1>
+	<h4 style="line-height: 30px;">Kupanga strives to provide a lasting experience that outshines competitors. We achived this by creating our website with you in mind. From our 3 easy steps, to our status button, we have simplicity and efficiency as our top priority.  </h4>
+	<h1>The Origin of Kupanga</h1>
+	<h4 style="line-height: 30px;">Everything started in January of 2018 as a school project, little did we know what kind of impact it would have on the community. We had 4 networking students, 2 programming students, and a digital media student create what may be the next Amazon for homes.</h4>
+	<h1>What Does Kupanga Mean?</h1>
+	<h4 style="line-height: 30px;">Kupanga is a translation from Swahili, meaning arrange or plan. What Kupanga means to our customers is simplicity, efficiency, and satisfaction. </h4>
+</div>
+<div class="col-md-4 text-center">
+	<br />
+	<img src="~/Content/Images/D. About/Kupanga Homes Logo Test.jpg" alt="Choose.jpg" style="height:200px;width:200px">
+</div>
 <address>
 	One Microsoft Way<br />
 	Redmond, WA 98052-6399<br />
