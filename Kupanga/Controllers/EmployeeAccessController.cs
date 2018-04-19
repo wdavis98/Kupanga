@@ -97,6 +97,65 @@ namespace Kupanga.Controllers
             return View(home);
         }
         [HttpGet]
+        public ActionResult EditHome(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Home home = db.Homes.Find(id);
+            if (home == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CategoryId = new SelectList(db.HomeCategories, "CategoryId", "CategoryName", home.CategoryId);
+
+
+            return View(home);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditHome([Bind(Include = "HomeName, HomeDescription, BasePrice, CategoryId, NumberOfDoors, UnitsOfFlooring, UnitsOfRoofing, Windows")] Home home, HttpPostedFileBase image, HttpPostedFileBase blueprint)
+        {
+            try
+            {
+                if (image != null)
+                {
+                    MemoryStream target = new MemoryStream();
+                    image.InputStream.CopyTo(target);
+                    home.Image = target.ToArray();
+                    ViewBag.spnHomeImageValidation = string.Empty;
+                }
+                else
+                {
+                    ViewBag.spnHomeImageValidation = "Image cannot be empty";
+                }
+                if (blueprint != null)
+                {
+                    MemoryStream target = new MemoryStream();
+                    blueprint.InputStream.CopyTo(target);
+                    home.Blueprint = target.ToArray();
+                    ViewBag.spnHomeBlueprintValidation = string.Empty;
+                }
+                {
+                    ViewBag.spnHomeBlueprintValidation = "Floor plan cannot be empty";
+                }
+            }
+            catch (Exception)
+            {
+                Session["ErrorMessages"] = "Image(s) are not valid";
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(home).State = EntityState.Modified;
+                db.SaveChanges();
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            ViewBag.CategoryId = new SelectList(db.HomeCategories, "CategoryId", "CategoryName");
+            return View(home);
+        }
+        [HttpGet]
         public ActionResult CreateComponent()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
@@ -144,11 +203,11 @@ namespace Kupanga.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Component component = db.Components.Find(id);
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", component.CategoryId);
             if (component == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", component.CategoryId);
 
             return View(component);
         }
