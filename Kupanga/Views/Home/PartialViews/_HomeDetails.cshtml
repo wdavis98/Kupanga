@@ -13,9 +13,9 @@
     }
 
     string blueprintSrc;
-    if (Model.Image != null && Model.Image.Length > 0)
+    if (Model.Image != null && Model.Blueprint.Length > 0)
     {
-        var base64 = Convert.ToBase64String(Model.Image);
+        var base64 = Convert.ToBase64String(Model.Blueprint);
         blueprintSrc = String.Format("data:image/gif;base64,{0}", base64);
     }
     else

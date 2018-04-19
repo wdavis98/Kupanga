@@ -48,16 +48,16 @@ namespace Kupanga.Controllers
             }
             return PartialView("PartialViews/_QuoteDetails", quote);
         }
-
+        [HttpGet]
         public ActionResult CreateHome()
         {
-            //ViewBag.SongbookId = new SelectList(db.Songbooks, "SongbookId", "SongbookName");
+            ViewBag.CategoryId = new SelectList(db.HomeCategories, "CategoryId", "CategoryName");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateHome([Bind(Include = "HomeName, HomeDescription, BasePrice")] Home home, HttpPostedFileBase image, HttpPostedFileBase blueprint)
+        public ActionResult CreateHome([Bind(Include = "HomeName, HomeDescription, BasePrice, CategoryId, NumberOfDoors, UnitsOfFlooring, UnitsOfRoofing, Windows")] Home home, HttpPostedFileBase image, HttpPostedFileBase blueprint)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Kupanga.Controllers
             }
             catch (Exception)
             {
-                // Do nothing
+                Session["ErrorMessages"] = "Image(s) are not valid"; 
             }
             if (ModelState.IsValid)
             {
@@ -93,10 +93,10 @@ namespace Kupanga.Controllers
                 db.SaveChanges();
                 return RedirectToAction("index");
             }
-
+            ViewBag.CategoryId = new SelectList(db.HomeCategories, "CategoryId", "CategoryName");
             return View(home);
         }
-
+        [HttpGet]
         public ActionResult CreateComponent()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
@@ -131,7 +131,7 @@ namespace Kupanga.Controllers
                 db.SaveChanges();
                 return RedirectToAction("index");
             }
-
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
             return View(component);
         }
 
@@ -181,7 +181,7 @@ namespace Kupanga.Controllers
                 db.SaveChanges();
                 return Redirect(Request.UrlReferrer.ToString());
             }
-
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
             return View(component);
         }
 
@@ -198,6 +198,27 @@ namespace Kupanga.Controllers
             }
             quote.HandledBy = User.Identity.GetUserId();
             quote.Status = 2;
+            if (ModelState.IsValid)
+            {
+                db.Entry(quote).State = EntityState.Modified;
+                db.SaveChanges();
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            return View("index");
+        }
+
+        public ActionResult ArchiveQuote(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SubmittedQuote quote = db.SubmittedQuotes.Find(id);
+            if (quote == null)
+            {
+                return HttpNotFound();
+            }
+            quote.Status = 3;
             if (ModelState.IsValid)
             {
                 db.Entry(quote).State = EntityState.Modified;

@@ -216,6 +216,7 @@
     <Compile Include="Models\Repository\Component.cs">
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repository\ComponentValidation.cs" />
     <Compile Include="Models\Repository\Home.cs">
       <DependentUpon>KupangaDbModel.tt</DependentUpon>
     </Compile>
@@ -393,7 +394,6 @@
     <Content Include="Views\EmployeeAccess\PartialViews\_ListComponents.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_InactiveQuotes.cshtml" />
     <Content Include="Views\EmployeeAccess\PartialViews\_ListHomes.cshtml" />
-    <Content Include="Views\EmployeeAccess\PartialViews\_CreateHome.cshtml" />
     <Content Include="Views\EmployeeAccess\CreateHome.cshtml" />
     <Content Include="Views\EmployeeAccess\CreateComponent.cshtml" />
     <Content Include="Views\EmployeeAccess\EditComponent.cshtml" />

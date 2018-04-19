@@ -11,7 +11,7 @@ namespace Kupanga.Models.Repository
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.MetadataType(typeof(ComponentValidation))]
     public partial class Component
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
