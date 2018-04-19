@@ -17,11 +17,6 @@
             border-right: 1px solid #ffffff;
         }
     </style>
-    @{
-        string errorMessages = (string)Session["ErrorMessages"];
-        Session["ErrorMessages"] = null;
-        string modalInClass = string.Empty;
-    }
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -55,28 +50,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/AjaxScripts.js"></script>
-    @if (!string.IsNullOrEmpty(errorMessages))
-    {
-        modalInClass = "in";
-    }
-    @* Warning Modal *@
-    <div class="modal fade in" id="WarningModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-header" style="background-color: darkorange">
-                Warning
-            </div>
-            <div class="modal-content">
-                <div id="WarningModalContent">
-                    @(errorMessages)
-                </div>
-                <br />
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
 </body>
 </html>

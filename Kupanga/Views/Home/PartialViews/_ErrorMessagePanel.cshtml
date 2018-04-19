@@ -1,0 +1,11 @@
+﻿@{
+    string errorMessages = (string)Session["ErrorMessages"];
+    Session["ErrorMessages"] = null;
+    if (!string.IsNullOrEmpty(errorMessages))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">Warning</div>
+            <div class="panel-body">@errorMessages</div>
+        </div>
+    }
+}
