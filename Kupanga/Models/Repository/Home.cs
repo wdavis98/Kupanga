@@ -27,6 +27,10 @@ namespace Kupanga.Models.Repository
         public byte[] Image { get; set; }
         public byte[] Blueprint { get; set; }
         public int CategoryId { get; set; }
+        public int NumberOfDoors { get; set; }
+        public decimal UnitsOfFlooring { get; set; }
+        public decimal UnitsOfRoofing { get; set; }
+        public int Windows { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubmittedQuote> SubmittedQuotes { get; set; }

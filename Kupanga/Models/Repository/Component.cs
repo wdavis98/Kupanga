@@ -18,6 +18,10 @@ namespace Kupanga.Models.Repository
         public Component()
         {
             this.QuoteComponents = new HashSet<QuoteComponent>();
+            this.SubmittedQuotes = new HashSet<SubmittedQuote>();
+            this.SubmittedQuotes1 = new HashSet<SubmittedQuote>();
+            this.SubmittedQuotes2 = new HashSet<SubmittedQuote>();
+            this.SubmittedQuotes3 = new HashSet<SubmittedQuote>();
         }
     
         public int ComponentId { get; set; }
@@ -29,5 +33,13 @@ namespace Kupanga.Models.Repository
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuoteComponent> QuoteComponents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubmittedQuote> SubmittedQuotes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubmittedQuote> SubmittedQuotes1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubmittedQuote> SubmittedQuotes2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubmittedQuote> SubmittedQuotes3 { get; set; }
     }
 }

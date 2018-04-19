@@ -31,11 +31,20 @@ namespace Kupanga.Models.Repository
         public string HandledBy { get; set; }
         public int HomeId { get; set; }
         public int Status { get; set; }
+        public Nullable<int> DoorId { get; set; }
+        public Nullable<int> WindowId { get; set; }
+        public Nullable<int> FloorId { get; set; }
+        public Nullable<int> RoofId { get; set; }
+        public string ContactPhoneNumber { get; set; }
     
         public virtual Home Home { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuoteComponent> QuoteComponents { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Status Status1 { get; set; }
+        public virtual Component Component { get; set; }
+        public virtual Component Component1 { get; set; }
+        public virtual Component Component2 { get; set; }
+        public virtual Component Component3 { get; set; }
     }
 }

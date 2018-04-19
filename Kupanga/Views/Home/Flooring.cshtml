@@ -1,195 +1,128 @@
-﻿
+﻿@using Kupanga.Models.Repository
 @{
-	/**/
+    /**/
 
-	ViewBag.Title = "Customize";
+    ViewBag.Title = "Customize";
 }
 <div class="container-fluid">
-	<div class="modal fade" id="imgModal" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-					<h4 class="modal-title" id="myModalLabel">Image preview</h4>
-				</div>
-				<div class="modal-body">
-					<div class="hidden-xs">
-						<img src="" id="imgPreview" class="imgModalView">
-					</div>
-					<div class="visible-xs">
-						<img src="" id="imgPreviewXs" class="imgModalViewXs">
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container-fluid">
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title text-center">Status</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-xs-4">
-							<p><b>Type</b></p>
-						</div>
-						<div class="col-xs-4">
-							<p><b>Price</b></p>
-						</div>
-						<div class="col-xs-4">
-							<p><b>Material</b></p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-4">
-							<p>Door</p>
-						</div>
-						<div class="col-xs-4">
-							<p>$100</p>
-						</div>
-						<div class="col-xs-4">
-							<p>Oak</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-4">
-							<p>Window</p>
-						</div>
-						<div class="col-xs-4">
-							<p>$200</p>
-						</div>
-						<div class="col-xs-4">
-							<p>Square</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-4">
-							<p>Roof</p>
-						</div>
-						<div class="col-xs-4">
-							<p>$3000</p>
-						</div>
-						<div class="col-xs-4">
-							<p>Metal</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-4">
-							<p>Floor</p>
-						</div>
-						<div class="col-xs-4">
-							<p>$100</p>
-						</div>
-						<div class="col-xs-4">
-							<p>Tile</p>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<img class="formatImg hidden-xs" src="~/Content/Images/B. Customize/step2.png" alt="One Story Homes">
-		<img class="formatImg visible-xs" src="~/Content/Images/B. Customize/step2xs.png" alt="One Story Homes">
-	</div>
-</div>
-<br />
-<div class="row">
-	<div class="col-md-12">
-		<h2 class="pillHeader">Choose From One of The Categories Below!</h2>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12 text-center">
-		<button type="button" class="btn btn-info pull-left hidden-xs statusClick" data-toggle="modal" data-target="#myModal">Status <span class="toggleBadge"></span></button>
-		<ul class="nav nav-pills center-pills">
-			<li>@Html.ActionLink("Doors", "Doors", "Home")</li>
-			<li>@Html.ActionLink("Windows", "Windows", "Home")</li>
-			<li>@Html.ActionLink("Roof", "Roof", "Home")</li>
-			<li class="active">@Html.ActionLink("Flooring", "Flooring", "Home")</li>
-		</ul>
-		<a class="btn btn-primary pull-right hidden-xs" href="@Url.Action("Confirm", "Home")">Continue &raquo;</a>
-	</div>
-</div>
-<div class="row visible-xs">
-	<div class="col-xs-6 text-center">
-		<button type="button" class="btn btn-info statusClick" data-toggle="modal" data-target="#myModal">Status <span class="toggleBadge"></span></button>
-	</div>
-	<div class="col-xs-6 text-center">
-		<a class="btn btn-primary" href="@Url.Action("Confirm", "Home")">Continue &raquo;</a>
-	</div>
-</div>
-<div>
-    @foreach (var floor in Model.components)
-    {
-        string imgSrc;
-        if (floor.Image != null && floor.Image.Length > 0)
-        {
-            var base64 = Convert.ToBase64String(floor.Image);
-            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-        }
-        else
-        {
-            imgSrc = "/Content/Images/Error/NotFound.png";
-        }
-        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-            <div class="card">
-                <div class="descriptionHeaderColor">
-                    <h2 class="descriptionHeader">@floor.ComponentName</h2>
-                    <p class="descriptionHeader">Per Door<span class="pull-right">@floor.ComponentPrice</span></p>
+    <div class="modal fade" id="imgModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Image preview</h4>
                 </div>
-                <div style="text-align:center"><label class="addPointer center"><input class="imgClick" type="radio" name="imgSelectName" value="@floor.ComponentId"><img id="imgSource@(floor.ComponentId)" class="card-img-top" style="max-width: 100%; height: 200px;" src="@(imgSrc)" alt="Card image cap" /></label></div>
-                <div class="card-body text-center">
-                    <br />
-                    <label id="label@(floor.ComponentId)" class="btn btn-primary resetLabel"><input class="buttonSelect" type="radio" name="buttonSelectName" value="@floor.ComponentId"><span id="span@(floor.ComponentId)" class="resetSpan">Select &raquo;</span></label>
+                <div class="modal-body">
+                    <div class="hidden-xs">
+                        <img src="" id="imgPreview" class="imgModalView">
+                    </div>
+                    <div class="visible-xs">
+                        <img src="" id="imgPreviewXs" class="imgModalViewXs">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    }
+    </div>
 </div>
+@Html.Partial("PartialViews/_RunningTally")
+<div class="row">
+    <div class="col-md-12">
+        <img class="formatImg hidden-xs" src="~/Content/Images/B. Customize/step2.png" alt="One Story Homes">
+        <img class="formatImg visible-xs" src="~/Content/Images/B. Customize/step2xs.png" alt="One Story Homes">
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="pillHeader">Choose From One of The Categories Below!</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <button type="button" class="btn btn-info pull-left hidden-xs statusClick" data-toggle="modal" data-target="#myModal">Status <span class="toggleBadge"></span></button>
+        <ul class="nav nav-pills center-pills">
+            <li>@Html.ActionLink("Doors", "Doors", "Home")</li>
+            <li>@Html.ActionLink("Windows", "Windows", "Home")</li>
+            <li>@Html.ActionLink("Roof", "Roof", "Home")</li>
+            <li class="active">@Html.ActionLink("Flooring", "Flooring", "Home")</li>
+        </ul>
+        <a class="btn btn-primary pull-right hidden-xs" href="@Url.Action("Confirm", "Home")">Continue &raquo;</a>
+    </div>
+</div>
+<div class="row visible-xs">
+    <div class="col-xs-6 text-center">
+        <button type="button" class="btn btn-info statusClick" data-toggle="modal" data-target="#myModal">Status <span class="toggleBadge"></span></button>
+    </div>
+    <div class="col-xs-6 text-center">
+        <a class="btn btn-primary" href="@Url.Action("Confirm", "Home")">Continue &raquo;</a>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    <div>
+        @foreach (var floor in Model.components)
+        {
+            string imgSrc;
+            if (floor.Image != null && floor.Image.Length > 0)
+            {
+                var base64 = Convert.ToBase64String(floor.Image);
+                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            }
+            else
+            {
+                imgSrc = "/Content/Images/Error/NotFound.png";
+            }
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                <div class="card">
+                    <div class="descriptionHeaderColor">
+                        <h2 class="descriptionHeader">@floor.ComponentName</h2>
+                        <p class="descriptionHeader">Per sq/ft<span class="pull-right">@floor.ComponentPrice</span></p>
+                    </div>
+                    <div style="text-align:center"><label class="addPointer center"><input class="imgClick" type="radio" name="imgSelectName" value="@floor.ComponentId"><img id="imgSource@(floor.ComponentId)" class="card-img-top" style="max-width: 100%; height: 200px;" src="@(imgSrc)" alt="Card image cap" /></label></div>
+                    <div class="card-body text-center">
+                        <br />
+                        @*<label id="label@(floor.ComponentId)" class="btn btn-primary resetLabel"><input class="buttonSelect" type="radio" name="buttonSelectName" value="@floor.ComponentId"><span id="span@(floor.ComponentId)" class="resetSpan">Select &raquo;</span></label>*@
+                        <button class="btn btn-primary" type="submit" name="floorId" value="@floor.ComponentId">Select &raquo;</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
 <script src="/Scripts/jquery-1.10.2.js"></script>
 <script src="/Scripts/respond.js"></script>
 <script>
-	$('.buttonSelect').on('click', function () {
-		var vbuttonSelect = $('input[name=buttonSelectName]:checked').val();
-		// Toggle the badge on the status to let the user know something changed
-		$('.toggleBadge').addClass("badge");
-		$('.toggleBadge').html("!")
-		// Make all buttons the same
-		$('.resetSpan').html("Select &raquo;")
-		$('.resetLabel').removeClass("btn-default").addClass("btn-primary");
-		// Change the selected button for large screens
-		$('#span' + vbuttonSelect).html("Selected &raquo;");
-		$('#label' + vbuttonSelect).removeClass("btn-primary").addClass("btn-default");
-		// Change the selected button on small screens
-		$('#xsSpan' + vbuttonSelect).html("Selected &raquo;");
-		$('#xsLabel' + vbuttonSelect).removeClass("btn-primary").addClass("btn-default");
-	});
-	$(".imgClick").on("click", function () {
-		var vImgId = $('input[name=imgSelectName]:checked').val();
-		// Assign image to modal
-		$('#imgPreview').attr('src', $('#imgSource' + vImgId).attr('src'));
-		$('#imgPreviewXs').attr('src', $('#imgSourceXs' + vImgId).attr('src'));
-		// open modal
-		$('#imgModal').modal('show');
-		// So it doesn't scroll to top of page
-		return false;
-	});
-	$(".statusClick").on("click", function () {
-		$('.toggleBadge').removeClass("badge");
-		$('.toggleBadge').html("")
-	});
+    $('.buttonSelect').on('click', function () {
+        var vbuttonSelect = $('input[name=buttonSelectName]:checked').val();
+        // Toggle the badge on the status to let the user know something changed
+        $('.toggleBadge').addClass("badge");
+        $('.toggleBadge').html("!")
+        // Make all buttons the same
+        $('.resetSpan').html("Select &raquo;")
+        $('.resetLabel').removeClass("btn-default").addClass("btn-primary");
+        // Change the selected button for large screens
+        $('#span' + vbuttonSelect).html("Selected &raquo;");
+        $('#label' + vbuttonSelect).removeClass("btn-primary").addClass("btn-default");
+        // Change the selected button on small screens
+        $('#xsSpan' + vbuttonSelect).html("Selected &raquo;");
+        $('#xsLabel' + vbuttonSelect).removeClass("btn-primary").addClass("btn-default");
+    });
+    $(".imgClick").on("click", function () {
+        var vImgId = $('input[name=imgSelectName]:checked').val();
+        // Assign image to modal
+        $('#imgPreview').attr('src', $('#imgSource' + vImgId).attr('src'));
+        $('#imgPreviewXs').attr('src', $('#imgSourceXs' + vImgId).attr('src'));
+        // open modal
+        $('#imgModal').modal('show');
+        // So it doesn't scroll to top of page
+        return false;
+    });
+    $(".statusClick").on("click", function () {
+        $('.toggleBadge').removeClass("badge");
+        $('.toggleBadge').html("")
+    });
 </script>
 

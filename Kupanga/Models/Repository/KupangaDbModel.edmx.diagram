@@ -22,6 +22,10 @@
         <AssociationConnector Association="KupangaModel.FK_SubmittedQuotes_Status" />
         <EntityTypeShape EntityType="KupangaModel.HomeCategory" Width="1.5" PointX="0.75" PointY="14.75" />
         <AssociationConnector Association="KupangaModel.FK_Homes_HomeCategories" />
+        <AssociationConnector Association="KupangaModel.FK_SubmittedQuotes_Components" />
+        <AssociationConnector Association="KupangaModel.FK_SubmittedQuotes_Components1" />
+        <AssociationConnector Association="KupangaModel.FK_SubmittedQuotes_Components2" />
+        <AssociationConnector Association="KupangaModel.FK_SubmittedQuotes_Components3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

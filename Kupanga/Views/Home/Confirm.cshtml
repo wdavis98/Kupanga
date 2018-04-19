@@ -1,46 +1,85 @@
-﻿
+﻿@using Kupanga.Models.Repository
+@model Kupanga.Models.Repository.SubmittedQuote
+
 @{
-	ViewBag.Title = "Confirm";
+    ViewBag.Title = "Confirm";
+    SubmittedQuote quote = ((SubmittedQuote)Session["CurrentQuote"]);
 }
 <style>
-	.center-pills {
-		display: inline-block;
-	}
+    .center-pills {
+        display: inline-block;
+    }
 </style>
 <div class="row">
-	<div class="col-md-12">
-		<img style="width:100%;height:200px;" src="~/Content/Images/C. Confirm/step3.png" alt="One Story Homes">
-	</div>
+    <div class="col-md-12">
+        <img style="width:100%;height:200px;" src="~/Content/Images/C. Confirm/step3.png" alt="One Story Homes">
+    </div>
 </div>
 <br />
 <div class="row">
-	<div class="col-md-12">
-		<h2 style="text-align:center;background-color:grey;color:white;">Please Fill Out Your Information Below!</h2>
-	</div>
+    <div class="col-md-12">
+        <h2 style="text-align:center;background-color:grey;color:white;">Please Fill Out Your Information Below!</h2>
+    </div>
 </div>
 <br />
-<div class='row'>
-	<div class='col-sm-2'><h4>Name</h4></div>
-	<div class='col-sm-4'>
-		<input class='form-control' type='text' name='iName' placeholder='Name' maxlength='10' required />
-	</div>
-	<div class='col-sm-2'><h4>Email</h4></div>
-	<div class='col-sm-4'>
-		<input class='form-control' type='text' name='iEmail' placeholder='Email' maxlength='10' />
-	</div>
+@* For summary *@
+<div class='row' style="margin-bottom: 16px; border: 1px solid lightgray; border-radius: 5px; padding: 10px">
+    <div class='col-sm-2'><h4>Your Home</h4></div>
+    <div class='col-sm-4'>
+        @quote.Home.HomeName
+        <br />
+        @quote.Component.ComponentName
+        <br />
+        @quote.Component1.ComponentName
+        <br />
+        @quote.Component3.ComponentName
+        <br />
+        @quote.Component2.ComponentName
+        <br />
+    </div>
+    <div>
+        <h3>Estimated Cost:</h3>
+        <br />
+        @((quote.Home.BasePrice + (quote.Home.NumberOfDoors * quote.Component.ComponentPrice) + (quote.Home.Windows * quote.Component1.ComponentPrice) + (quote.Home.UnitsOfFlooring * quote.Component2.ComponentPrice) + (quote.Home.UnitsOfRoofing * quote.Component3.ComponentPrice)).ToString("C") )
+    </div>
 </div>
-<div class='row'>
-	<div class='col-sm-2'><h4>Address</h4></div>
-	<div class='col-sm-4'>
-		<input class='form-control' type='text' name='iAddress' placeholder='Address' maxlength='10' required />
-	</div>
-	<div class='col-sm-2'><h4>Phone Number</h4></div>
-	<div class='col-sm-4'>
-		<input class='form-control' type='text' name='iPhoneNumber' placeholder='Phone Number' maxlength='10' />
-	</div>
-</div>
-<br />
-<div class="row text-center">
-	<p><a class="btn btn-primary" href="@Url.Action("Index", "Home")">Confirm &raquo;</a></p>
-</div>
+@using (Html.BeginForm())
+{
+
+    <div class='row' style="margin-bottom: 16px">
+        <div class='col-sm-2'><h4>Name</h4></div>
+        <div class='col-sm-5'>
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactFirstName' placeholder='First Name' maxlength='50' required />
+        </div>
+        <div class="col-sm-5">
+            <input class='form-control' type='text' name='contactLastName' placeholder='Last Name' maxlength='50' required />
+        </div>
+    </div>
+    <div class='row' style="margin-bottom: 16px">
+        <div class='col-sm-2'><h4>Contact Info</h4></div>
+        <div class='col-sm-5'>
+            <input style="margin-bottom: 16px" class='form-control' type='tel' name='contactPhoneNumber' placeholder='Phone Number' maxlength='10' />
+        </div>
+        <div class='col-sm-5'>
+            <input style="margin-bottom: 16px" class='form-control' type='email' name='contactEmail' placeholder='Email' maxlength='200' />
+        </div>
+        <div class='col-md-offset-2 col-sm-5'>
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactStreetAddress' placeholder='Street Address' maxlength='200' />
+        </div>
+        <div class='col-sm-5'>
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactCity' placeholder='City' maxlength='200' />
+        </div>
+        <div class='col-sm-offset-2 col-sm-5'>
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactState' placeholder='State' maxlength='200' />
+        </div>
+        <div class='col-sm-5'>
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactZip' placeholder='zip' maxlength='200' />
+        </div>
+    </div>
+    <br />
+    <div class="row text-center">
+        <p>@*<a class="btn btn-primary" href="@Url.Action("Index", "Home")">Confirm &raquo;</a>*@</p>
+        <button type="submit" name="submit">Confirm &raquo;</button>
+    </div>
+}
 

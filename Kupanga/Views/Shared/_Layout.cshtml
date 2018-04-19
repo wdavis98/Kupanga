@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>@ViewBag.Title</title>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/modernizr")
-	<link href="~/Content/kupangaBlue.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/kupangaBlue.css" rel="stylesheet" />
 
 </head>
 <!--<body style="background-color:black">-->
@@ -17,6 +17,11 @@
             border-right: 1px solid #ffffff;
         }
     </style>
+    @{
+        string errorMessages = (string)Session["ErrorMessages"];
+        Session["ErrorMessages"] = null;
+        string modalInClass = string.Empty;
+    }
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -26,14 +31,14 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href='@Url.Action("Index", "Home")'>
-                    <img src="~/Content/Images/Navbar/test icon3.png" />
+                    <img src="~/Content/Images/Navbar/KupangaLogoGray.png" />
                 </a>
                 @*@Html.ActionLink("Kupanga", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Choose Your Home", "OneStory", "Home")</li>
-                    <li class="divider-vertical"></li>
+                    @*<li class="divider-vertical"></li>*@
                     <li>@Html.ActionLink("About Kupanga", "About", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -41,6 +46,7 @@
         </div>
     </div>
     <div class="container">
+
         @RenderBody()
         <hr />
     </div>
@@ -49,6 +55,28 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/AjaxScripts.js"></script>
+    @if (!string.IsNullOrEmpty(errorMessages))
+    {
+        modalInClass = "in";
+    }
+    @* Warning Modal *@
+    <div class="modal fade in" id="WarningModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-header" style="background-color: darkorange">
+                Warning
+            </div>
+            <div class="modal-content">
+                <div id="WarningModalContent">
+                    @(errorMessages)
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

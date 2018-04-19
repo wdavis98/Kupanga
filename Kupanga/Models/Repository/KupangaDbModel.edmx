@@ -57,6 +57,10 @@
           <Property Name="Blueprint" Type="image" />
           <Property Name="BasePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="NumberOfDoors" Type="int" Nullable="false" />
+          <Property Name="UnitsOfFlooring" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="UnitsOfRoofing" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Windows" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -98,6 +102,11 @@
           <Property Name="HandledBy" Type="nvarchar" MaxLength="128" />
           <Property Name="HomeId" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="DoorId" Type="int" />
+          <Property Name="WindowId" Type="int" />
+          <Property Name="FloorId" Type="int" />
+          <Property Name="RoofId" Type="int" />
+          <Property Name="ContactPhoneNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Components_Categories">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
@@ -171,6 +180,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubmittedQuotes_Components">
+          <End Role="Components" Type="Self.Components" Multiplicity="0..1" />
+          <End Role="SubmittedQuotes" Type="Self.SubmittedQuotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="SubmittedQuotes">
+              <PropertyRef Name="DoorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmittedQuotes_Components1">
+          <End Role="Components" Type="Self.Components" Multiplicity="0..1" />
+          <End Role="SubmittedQuotes" Type="Self.SubmittedQuotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="SubmittedQuotes">
+              <PropertyRef Name="WindowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmittedQuotes_Components2">
+          <End Role="Components" Type="Self.Components" Multiplicity="0..1" />
+          <End Role="SubmittedQuotes" Type="Self.SubmittedQuotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="SubmittedQuotes">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmittedQuotes_Components3">
+          <End Role="Components" Type="Self.Components" Multiplicity="0..1" />
+          <End Role="SubmittedQuotes" Type="Self.SubmittedQuotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="SubmittedQuotes">
+              <PropertyRef Name="RoofId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SubmittedQuotes_Homes">
           <End Role="Homes" Type="Self.Homes" Multiplicity="1" />
           <End Role="SubmittedQuotes" Type="Self.SubmittedQuotes" Multiplicity="*" />
@@ -229,6 +286,22 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="SubmittedQuotes" EntitySet="SubmittedQuotes" />
           </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Components" Association="Self.FK_SubmittedQuotes_Components">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="SubmittedQuotes" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Components1" Association="Self.FK_SubmittedQuotes_Components1">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="SubmittedQuotes" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Components2" Association="Self.FK_SubmittedQuotes_Components2">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="SubmittedQuotes" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Components3" Association="Self.FK_SubmittedQuotes_Components3">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="SubmittedQuotes" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
           <AssociationSet Name="FK_SubmittedQuotes_Homes" Association="Self.FK_SubmittedQuotes_Homes">
             <End Role="Homes" EntitySet="Homes" />
             <End Role="SubmittedQuotes" EntitySet="SubmittedQuotes" />
@@ -261,6 +334,10 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_Components_Categories" FromRole="Components" ToRole="Categories" />
           <NavigationProperty Name="QuoteComponents" Relationship="KupangaModel.FK_QuoteComponents_Components" FromRole="Component" ToRole="QuoteComponent" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="SubmittedQuotes" Relationship="KupangaModel.FK_SubmittedQuotes_Components" FromRole="Component" ToRole="SubmittedQuote" />
+          <NavigationProperty Name="SubmittedQuotes1" Relationship="KupangaModel.FK_SubmittedQuotes_Components1" FromRole="Component" ToRole="SubmittedQuote" />
+          <NavigationProperty Name="SubmittedQuotes2" Relationship="KupangaModel.FK_SubmittedQuotes_Components2" FromRole="Component" ToRole="SubmittedQuote" />
+          <NavigationProperty Name="SubmittedQuotes3" Relationship="KupangaModel.FK_SubmittedQuotes_Components3" FromRole="Component" ToRole="SubmittedQuote" />
         </EntityType>
         <EntityType Name="Home">
           <Key>
@@ -275,6 +352,10 @@
           <Property Name="Blueprint" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="HomeCategory" Relationship="KupangaModel.FK_Homes_HomeCategories" FromRole="Home" ToRole="HomeCategory" />
+          <Property Name="NumberOfDoors" Type="Int32" Nullable="false" />
+          <Property Name="UnitsOfFlooring" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="UnitsOfRoofing" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Windows" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -341,6 +422,22 @@
             <End Role="HomeCategory" EntitySet="HomeCategories" />
             <End Role="Home" EntitySet="Homes" />
           </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Components" Association="KupangaModel.FK_SubmittedQuotes_Components">
+            <End Role="Component" EntitySet="Components" />
+            <End Role="SubmittedQuote" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Components1" Association="KupangaModel.FK_SubmittedQuotes_Components1">
+            <End Role="Component" EntitySet="Components" />
+            <End Role="SubmittedQuote" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Components2" Association="KupangaModel.FK_SubmittedQuotes_Components2">
+            <End Role="Component" EntitySet="Components" />
+            <End Role="SubmittedQuote" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmittedQuotes_Components3" Association="KupangaModel.FK_SubmittedQuotes_Components3">
+            <End Role="Component" EntitySet="Components" />
+            <End Role="SubmittedQuote" EntitySet="SubmittedQuotes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="QuoteComponent">
           <Key>
@@ -371,6 +468,15 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="KupangaModel.FK_SubmittedQuotes_AspNetUsers" FromRole="SubmittedQuote" ToRole="AspNetUser" />
           <NavigationProperty Name="Status1" Relationship="KupangaModel.FK_SubmittedQuotes_Status" FromRole="SubmittedQuote" ToRole="Status" />
+          <Property Name="DoorId" Type="Int32" />
+          <Property Name="WindowId" Type="Int32" />
+          <Property Name="FloorId" Type="Int32" />
+          <Property Name="RoofId" Type="Int32" />
+          <NavigationProperty Name="Component" Relationship="KupangaModel.FK_SubmittedQuotes_Components" FromRole="SubmittedQuote" ToRole="Component" />
+          <NavigationProperty Name="Component1" Relationship="KupangaModel.FK_SubmittedQuotes_Components1" FromRole="SubmittedQuote" ToRole="Component" />
+          <NavigationProperty Name="Component2" Relationship="KupangaModel.FK_SubmittedQuotes_Components2" FromRole="SubmittedQuote" ToRole="Component" />
+          <NavigationProperty Name="Component3" Relationship="KupangaModel.FK_SubmittedQuotes_Components3" FromRole="SubmittedQuote" ToRole="Component" />
+          <Property Name="ContactPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_QuoteComponents_Components">
           <End Type="KupangaModel.Component" Role="Component" Multiplicity="1" />
@@ -491,6 +597,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubmittedQuotes_Components">
+          <End Type="KupangaModel.Component" Role="Component" Multiplicity="0..1" />
+          <End Type="KupangaModel.SubmittedQuote" Role="SubmittedQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="SubmittedQuote">
+              <PropertyRef Name="DoorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmittedQuotes_Components1">
+          <End Type="KupangaModel.Component" Role="Component" Multiplicity="0..1" />
+          <End Type="KupangaModel.SubmittedQuote" Role="SubmittedQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="SubmittedQuote">
+              <PropertyRef Name="WindowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmittedQuotes_Components2">
+          <End Type="KupangaModel.Component" Role="Component" Multiplicity="0..1" />
+          <End Type="KupangaModel.SubmittedQuote" Role="SubmittedQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="SubmittedQuote">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmittedQuotes_Components3">
+          <End Type="KupangaModel.Component" Role="Component" Multiplicity="0..1" />
+          <End Type="KupangaModel.SubmittedQuote" Role="SubmittedQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="SubmittedQuote">
+              <PropertyRef Name="RoofId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -519,6 +673,10 @@
           <EntitySetMapping Name="Homes">
             <EntityTypeMapping TypeName="KupangaModel.Home">
               <MappingFragment StoreEntitySet="Homes">
+                <ScalarProperty Name="Windows" ColumnName="Windows" />
+                <ScalarProperty Name="UnitsOfRoofing" ColumnName="UnitsOfRoofing" />
+                <ScalarProperty Name="UnitsOfFlooring" ColumnName="UnitsOfFlooring" />
+                <ScalarProperty Name="NumberOfDoors" ColumnName="NumberOfDoors" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Blueprint" ColumnName="Blueprint" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
@@ -552,6 +710,11 @@
           <EntitySetMapping Name="SubmittedQuotes">
             <EntityTypeMapping TypeName="KupangaModel.SubmittedQuote">
               <MappingFragment StoreEntitySet="SubmittedQuotes">
+                <ScalarProperty Name="ContactPhoneNumber" ColumnName="ContactPhoneNumber" />
+                <ScalarProperty Name="RoofId" ColumnName="RoofId" />
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+                <ScalarProperty Name="WindowId" ColumnName="WindowId" />
+                <ScalarProperty Name="DoorId" ColumnName="DoorId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="HomeId" ColumnName="HomeId" />
                 <ScalarProperty Name="HandledBy" ColumnName="HandledBy" />

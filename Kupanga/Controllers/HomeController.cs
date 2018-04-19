@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Kupanga.Models;
 using System.Net;
+using Kupanga.Helpers;
 
 namespace Kupanga.Controllers
 {
@@ -32,10 +33,42 @@ namespace Kupanga.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Confirm()
         {
-            ViewBag.Message = "Your test choose page.";
+            object currentQutoe = Session["CurrentQuote"];
+            string destination = Helpers.NavigationHelper.ValidateSessionQuote("confirm", currentQutoe);
+            if (destination.ToUpper() != "CONFIRM")
+            {
+                Session["ErrorMessages"] = "Please Select a product";
+                return RedirectToAction(destination);
+            }
+            return View("Confirm");
+        }
+        [HttpPost]
+        public ActionResult Confirm([Bind(Include = "ContactFirstName, ContactLastName, ContactPhoneNumber, ContactEmail, ContactStreetAddress, ContactCity, ContactState, ContactZip")] SubmittedQuote quote)
+        {
+            try
+            {
+                SubmittedQuote sessionQuote = ((SubmittedQuote)Session["CurrentQuote"]);
+                quote.HomeId = sessionQuote.HomeId;
+                quote.DoorId = sessionQuote.DoorId;
+                quote.FloorId = sessionQuote.FloorId;
+                quote.RoofId = sessionQuote.RoofId;
+                quote.WindowId = sessionQuote.WindowId;
 
+                quote.Status = 1;
+                if (ModelState.IsValid)
+                {
+                    db.SubmittedQuotes.Add(quote);
+                    db.SaveChanges();
+                    return RedirectToAction("thankyou");
+                }
+            }
+            catch (Exception ex)
+            {
+                RedirectToAction("Confirm");
+            }
             return View();
         }
 
@@ -52,7 +85,6 @@ namespace Kupanga.Controllers
             }
             return PartialView("PartialViews/_HomeDetails", home);
         }
-
         public ActionResult OneStory()
         {
             HomesViewModel viewModel = new HomesViewModel();
@@ -93,8 +125,31 @@ namespace Kupanga.Controllers
             return View(viewModel);
         }
 
+        public ActionResult SaveSelectedHouse(int? homeId)
+        {
+            SubmittedQuote newQuote = new SubmittedQuote();
+            Session["CurrentQuote"] = newQuote;
+            try
+            {
+                ((SubmittedQuote)Session["CurrentQuote"]).HomeId = (int)homeId;
+                ((SubmittedQuote)Session["CurrentQuote"]).Home = db.Homes.Find((int)homeId);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("OneStory");
+            }
+
+            return RedirectToAction("Doors");
+        }
+
+
+        [HttpGet]
         public ActionResult Doors()
         {
+            if(Session["CurrentQuote"] == null)
+            {
+                return RedirectToAction("OneStory");
+            }
             List<Component> components = db.Components.ToList();
             ComponentsViewModel doors = new ComponentsViewModel();
             doors.components = (from door in components
@@ -102,9 +157,31 @@ namespace Kupanga.Controllers
                                 select door).ToList();
             return View(doors);
         }
-
+        [HttpPost]
+        public ActionResult Doors(int? doorId)
+        {
+            if (Session["CurrentQuote"] == null)
+            {
+                return RedirectToAction("OneStory");
+            }
+            try
+            {
+                ((SubmittedQuote)Session["CurrentQuote"]).DoorId = doorId;
+                ((SubmittedQuote)Session["CurrentQuote"]).Component = db.Components.Find(doorId);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("OneStory");
+            }
+            return RedirectToAction("Windows");
+        }
+        [HttpGet]
         public ActionResult Windows()
         {
+            if (Session["CurrentQuote"] == null)
+            {
+                return RedirectToAction("OneStory");
+            }
             List<Component> components = db.Components.ToList();
             ComponentsViewModel windows = new ComponentsViewModel();
             windows.components = (from door in components
@@ -113,9 +190,31 @@ namespace Kupanga.Controllers
 
             return View(windows);
         }
-
+        [HttpPost]
+        public ActionResult Windows(int? windowId)
+        {
+            if (Session["CurrentQuote"] == null)
+            {
+                return RedirectToAction("OneStory");
+            }
+            try
+            {
+                ((SubmittedQuote)Session["CurrentQuote"]).WindowId = windowId;
+                ((SubmittedQuote)Session["CurrentQuote"]).Component1 = db.Components.Find(windowId);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("OneStory");
+            }
+            return RedirectToAction("Roof");
+        }
+        [HttpGet]
         public ActionResult Roof()
         {
+            if (Session["CurrentQuote"] == null)
+            {
+                return RedirectToAction("OneStory");
+            }
             List<Component> components = db.Components.ToList();
             ComponentsViewModel roofs = new ComponentsViewModel();
             roofs.components = (from door in components
@@ -124,9 +223,31 @@ namespace Kupanga.Controllers
 
             return View(roofs);
         }
-
+        [HttpPost]
+        public ActionResult Roof(int? roofId)
+        {
+            if (Session["CurrentQuote"] == null)
+            {
+                return RedirectToAction("OneStory");
+            }
+            try
+            {
+                ((SubmittedQuote)Session["CurrentQuote"]).RoofId = roofId;
+                ((SubmittedQuote)Session["CurrentQuote"]).Component3 = db.Components.Find(roofId);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("OneStory");
+            }
+            return RedirectToAction("Flooring");
+        }
+        [HttpGet]
         public ActionResult Flooring()
         {
+            if (Session["CurrentQuote"] == null)
+            {
+                return RedirectToAction("OneStory");
+            }
             List<Component> components = db.Components.ToList();
             ComponentsViewModel floors = new ComponentsViewModel();
             floors.components = (from door in components
@@ -135,11 +256,34 @@ namespace Kupanga.Controllers
 
             return View(floors);
         }
+        [HttpPost]
+        public ActionResult Flooring(int? floorId)
+        {
+            if (Session["CurrentQuote"] == null)
+            {
+                return RedirectToAction("OneStory");
+            }
+            try
+            {
+                ((SubmittedQuote)Session["CurrentQuote"]).FloorId = floorId;
+                ((SubmittedQuote)Session["CurrentQuote"]).Component2 = db.Components.Find(floorId);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("OneStory");
+            }
+            return RedirectToAction("Confirm");
+        }
 
         public ActionResult Feedback()
         {
             ViewBag.Message = "Your feedback page.";
 
+            return View();
+        }
+
+        public ActionResult ThankYou()
+        {
             return View();
         }
     }

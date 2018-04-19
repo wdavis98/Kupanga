@@ -33,6 +33,7 @@
         <h2 style="text-align:center;background-color:grey;color:white;">Choose From One of The Categories Below!</h2>
     </div>
 </div>
+
 <div class="col-md-12 text-center">
     <ul class="nav nav-pills center-pills">
         <li class="active">@Html.ActionLink("One-Story Homes", "OneStory", "Home")</li>
@@ -41,37 +42,39 @@
         <li>@Html.ActionLink("Ranch Style Homes", "RanchStyle", "Home")</li>
     </ul>
 </div>
-<div>
-    @foreach (var home in Model.Homes)
-    {
-        string imgSrc;
-        if (home.Image != null && home.Image.Length > 0)
+@using (Html.BeginForm("SaveSelectedHouse", "Home", FormMethod.Post))
+{
+    <div>
+        @foreach (var home in Model.Homes)
         {
-            var base64 = Convert.ToBase64String(home.Image);
-            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-        }
-        else
-        {
-            imgSrc = "/Content/Images/Error/NotFound.png";
-        }
-        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-            <div class="card" >
-                <div style="background-color:gray;">
-                    <h2 style="color:white;padding-left:10px;">@home.HomeName</h2>
-                </div>
-                <div style="text-align:center;"><img class="card-img-top" style="height: 15em;" src="@(imgSrc)" alt="@home.HomeName"></div>
-                <div class="card-body">
-                    <p style="height: 3em; overflow:hidden" class="card-text">@home.HomeDescription</p>
-                    <br />
-                    <input class="btn btn-info" type="button" data-toggle="modal" data-target="#homeDetailsModal" onclick="viewHomeDetails(@home.HomeId)" value="Details" />
-                    <a class="btn btn-primary" href="@Url.Action("Doors", "Home")">Select This Home &raquo;</a>
+            string imgSrc;
+            if (home.Image != null && home.Image.Length > 0)
+            {
+                var base64 = Convert.ToBase64String(home.Image);
+                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            }
+            else
+            {
+                imgSrc = "/Content/Images/Error/NotFound.png";
+            }
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div style="background-color:gray;">
+                        <h2 style="color:white;padding-left:10px;">@home.HomeName</h2>
+                    </div>
+                    <div style="text-align:center;"><img class="card-img-top" style="height: 15em;" src="@(imgSrc)" alt="@home.HomeName"></div>
+                    <div class="card-body">
+                        <p style="height: 3em; overflow:hidden" class="card-text">@home.HomeDescription</p>
+                        <br />
+                        <input class="btn btn-info" type="button" data-toggle="modal" data-target="#homeDetailsModal" onclick="viewHomeDetails(@home.HomeId)" value="Details" />
+                        <button class="btn btn-primary" type="submit" name="homeId" value="@home.HomeId">Select This Home &raquo;</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
 
-</div>
-@Scripts.Render("~/bundles/jquery")
+    </div>
+}
 <script>
     $(function () {
         $('.toggle-floor').click(function (e) {
@@ -80,4 +83,3 @@
         });
     });
 </script>
-
