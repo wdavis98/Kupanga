@@ -35,6 +35,10 @@
                     <li>@Html.ActionLink("Choose Your Home", "OneStory", "Home")</li>
                     @*<li class="divider-vertical"></li>*@
                     <li>@Html.ActionLink("About Kupanga", "About", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                    <li>@Html.ActionLink("Employee Access", "Index", "EmployeeAccess")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
