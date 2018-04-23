@@ -21,18 +21,18 @@ namespace Kupanga.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "About Page";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact page.";
 
             return View();
         }
-
+        //This is the page that will submit the quote. You can see the quote via the employee access screen
         [HttpGet]
         public ActionResult Confirm()
         {

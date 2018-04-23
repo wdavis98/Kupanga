@@ -58,28 +58,28 @@
     <div class='row' style="margin-bottom: 16px">
         <div class='col-sm-2'><h4>Contact Info</h4></div>
         <div class='col-sm-5'>
-            <input style="margin-bottom: 16px" class='form-control' type='tel' name='contactPhoneNumber' placeholder='Phone Number' maxlength='10' />
+            <input style="margin-bottom: 16px" class='form-control' type='tel' name='contactPhoneNumber' placeholder='Phone Number' maxlength='10' required />
         </div>
         <div class='col-sm-5'>
-            <input style="margin-bottom: 16px" class='form-control' type='email' name='contactEmail' placeholder='Email' maxlength='200' />
+            <input style="margin-bottom: 16px" class='form-control' type='email' name='contactEmail' placeholder='Email' maxlength='200' required/>
         </div>
         <div class='col-md-offset-2 col-sm-5'>
-            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactStreetAddress' placeholder='Street Address' maxlength='200' />
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactStreetAddress' placeholder='Street Address' maxlength='200' required/>
         </div>
         <div class='col-sm-5'>
-            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactCity' placeholder='City' maxlength='200' />
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactCity' placeholder='City' maxlength='200' required/>
         </div>
         <div class='col-sm-offset-2 col-sm-5'>
-            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactState' placeholder='State' maxlength='200' />
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactState' placeholder='State' maxlength='200' required/>
         </div>
         <div class='col-sm-5'>
-            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactZip' placeholder='zip' maxlength='200' />
+            <input style="margin-bottom: 16px" class='form-control' type='text' name='contactZip' placeholder='zip' maxlength='200' required/>
         </div>
     </div>
     <br />
     <div class="row text-center">
         <p>@*<a class="btn btn-primary" href="@Url.Action("Index", "Home")">Confirm &raquo;</a>*@</p>
-        <button type="submit" name="submit">Confirm &raquo;</button>
+        <button class="btn btn-primary" type="submit" name="submit">Confirm &raquo;</button>
     </div>
 }
 

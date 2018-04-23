@@ -295,9 +295,11 @@
     <Content Include="Content\Images\HomePage\find.jpg" />
     <Content Include="Content\Images\HomePage\prints.jpg" />
     <Content Include="Content\Images\HomePage\wood.jpg" />
+    <Content Include="Content\Images\Navbar\favicon.ico" />
     <Content Include="Content\Images\Navbar\KupangaLogo.png" />
     <Content Include="Content\Images\Navbar\KupangaLogoBlue.png" />
     <Content Include="Content\Images\Navbar\KupangaLogoBlueSmall.png" />
+    <Content Include="Content\Images\Navbar\KupangaLogoGray.png" />
     <Content Include="Content\Images\Navbar\test icon3.png" />
     <Content Include="Content\kupangaBlue.css" />
     <Content Include="favicon.ico" />

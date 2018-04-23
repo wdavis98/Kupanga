@@ -24,6 +24,7 @@
                 <span>@item.BasePrice.ToString("C")</span>
             </td>
             <td>
+                @Html.ActionLink("Edit","EditHome", new { id = item.HomeId })
             </td>
         </tr>
     }

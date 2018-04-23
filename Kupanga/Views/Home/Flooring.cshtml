@@ -3,6 +3,8 @@
     /**/
 
     ViewBag.Title = "Customize";
+    int selectedFloor;
+    int.TryParse(((SubmittedQuote)Session["CurrentQuote"]).FloorId.ToString(), out selectedFloor);
 }
 <div class="container-fluid">
     <div class="modal fade" id="imgModal" role="dialog">
@@ -85,8 +87,15 @@
                     <div style="text-align:center"><label class="addPointer center"><input class="imgClick" type="radio" name="imgSelectName" value="@floor.ComponentId"><img id="imgSource@(floor.ComponentId)" class="card-img-top" style="max-width: 100%; height: 200px;" src="@(imgSrc)" alt="Card image cap" /></label></div>
                     <div class="card-body text-center">
                         <br />
-                        @*<label id="label@(floor.ComponentId)" class="btn btn-primary resetLabel"><input class="buttonSelect" type="radio" name="buttonSelectName" value="@floor.ComponentId"><span id="span@(floor.ComponentId)" class="resetSpan">Select &raquo;</span></label>*@
-                        <button class="btn btn-primary" type="submit" name="floorId" value="@floor.ComponentId">Select &raquo;</button>
+                        @if (floor.ComponentId == selectedFloor)
+                        {
+                            <button class="btn btn-default" type="submit" name="floorId" value="@floor.ComponentId">Selected &raquo;</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" type="submit" name="floorId" value="@floor.ComponentId">Select &raquo;</button>
+
+                        }
                     </div>
                 </div>
             </div>

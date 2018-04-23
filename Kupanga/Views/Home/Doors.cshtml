@@ -1,6 +1,9 @@
 ﻿@model Kupanga.Models.ComponentsViewModel
+@using Kupanga.Models.Repository
 @{
     ViewBag.Title = "Customize";
+    int selectedDoor;
+    int.TryParse(((SubmittedQuote)Session["CurrentQuote"]).DoorId.ToString(), out selectedDoor);
 }
 <div class="container-fluid">
     <div class="modal fade" id="imgModal" role="dialog">
@@ -78,13 +81,21 @@
                 <div class="card">
                     <div class="descriptionHeaderColor">
                         <h2 class="descriptionHeader">@door.ComponentName</h2>
-                        <p class="descriptionHeader">Per Door<span class="pull-right">@door.ComponentPrice</span></p>
+                        <p class="descriptionHeader">Per Door<span class="pull-right">@door.ComponentPrice.ToString("C")</span></p>
                     </div>
                     <div style="text-align:center"><label class="addPointer center"><input class="imgClick" type="radio" name="imgSelectName" value="@door.ComponentId"><img id="imgSource@(door.ComponentId)" class="card-img-top" style="max-width: 100%; height: 200px;" src="@(imgSrc)" alt="Card image cap" /></label></div>
                     <div class="card-body text-center">
                         <br />
                         @*<label id="label@(door.ComponentId)" class="btn btn-primary resetLabel"><input class="buttonSelect" type="radio" name="buttonSelectName" value="@door.ComponentId"><span id="span@(door.ComponentId)" class="resetSpan">Select &raquo;</span></label>*@
-                        <button class="btn btn-primary" type="submit" name="doorId" value="@door.ComponentId">Select &raquo;</button>
+                        @if (door.ComponentId == selectedDoor)
+                        {
+                            <button class="btn btn-default" type="submit" name="doorId" value="@door.ComponentId">Selected &raquo;</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" type="submit" name="doorId" value="@door.ComponentId">Select &raquo;</button>
+
+                        }
                     </div>
                 </div>
             </div>

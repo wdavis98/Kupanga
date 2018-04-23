@@ -1,8 +1,10 @@
-﻿
+﻿@using Kupanga.Models.Repository
 @{
     /**/
 
     ViewBag.Title = "Customize";
+    int selectedRoof;
+    int.TryParse(((SubmittedQuote)Session["CurrentQuote"]).RoofId.ToString(), out selectedRoof);
 }
 <div class="container-fluid">
     <div class="modal fade" id="imgModal" role="dialog">
@@ -85,8 +87,15 @@
                     <div style="text-align:center"><label class="addPointer center"><input class="imgClick" type="radio" name="imgSelectName" value="@roof.ComponentId"><img id="imgSource@(roof.ComponentId)" class="card-img-top" style="max-width: 100%; height: 200px;" src="@(imgSrc)" alt="Card image cap" /></label></div>
                     <div class="card-body text-center">
                         <br />
-                        @*<label id="label@(roof.ComponentId)" class="btn btn-primary resetLabel"><input class="buttonSelect" type="radio" name="buttonSelectName" value="@roof.ComponentId"><span id="span@(roof.ComponentId)" class="resetSpan">Select &raquo;</span></label>*@
-                        <button class="btn btn-primary" type="submit" name="roofId" value="@roof.ComponentId">Select &raquo;</button>
+                        @if (roof.ComponentId == selectedRoof)
+                        {
+                            <button class="btn btn-default" type="submit" name="roofId" value="@roof.ComponentId">Selected &raquo;</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" type="submit" name="roofId" value="@roof.ComponentId">Select &raquo;</button>
+
+                        }
                     </div>
                 </div>
             </div>
